@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登録</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <!-- semantic.css  -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+
+    <!-- semantic.js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
+</head>
+
+<body>
+<!-- th:replaceを使用して、 メニュー用のフラグメントを読込みます -->
+<div th:replace="common/menu :: menu_fragment"></div>
+
+<div class="ui container">
+    <form class="ui form">
+        <div class="ui grid">
+            <div class="twelve wide column">
+                <div class="row">
+                    <div class="field">
+                        <label>First Name</label>
+                        <input type="text" name="first-name" placeholder="First Name">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <p>Lorem Ipsum(略)</p>
+                </div>
+                <div class="row">
+                    <p>Lorem Ipsum(略)</p>
+                </div>
+                <div class="row">
+                    <p>Lorem Ipsum(略)</p>
+                </div>
+                <div class="row">
+                    <p>Lorem Ipsum(略)</p>
+                </div>
+                <div class="row">
+                    <p>Lorem Ipsum(略)</p>
+                </div>
+            </div>
+            <div class="four wide column">
+                <img class="ui medium circular image" src="/images/square-image.png">
+            </div>
+
+
+        </div>
+        <div class="ui three column　grid">
+            <div class="two column row">
+                <div class="colmun">
+                    <div class="field">
+                        <label>First Name</label>
+                        <input type="text" name="first-name" placeholder="First Name">
+                    </div>
+                    <div class="field">
+                        <label>Last Name</label>
+                        <input type="text" name="last-name" placeholder="Last Name">
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                            <input type="checkbox" tabindex="0" class="hidden">
+                            <label>I agree to the Terms and Conditions</label>
+                        </div>
+                    </div>
+                    <button class="ui button" type="submit">Submit</button>
+                </div>
+            </div>
+            <div class="column">
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

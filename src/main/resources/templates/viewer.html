@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>一覧</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <!-- semantic.css  -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+
+    <!-- semantic.js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
+</head>
+
+<body>
+<!-- th:replaceを使用して、 メニュー用のフラグメントを読込みます -->
+<div th:replace="common/menu :: menu_fragment"></div>
+
+<div class="ui container">
+    <div class="ui piled segment">
+        <h2 class="ui header">[[${msg}]]</h2>
+        <p>Webアプリ研修。</p>
+        <p></p>
+
+        <h4>## 課題実施目的</h4>
+        <p>- MVCモデルを理解する。</p>
+        <p>- DB ⇒ API ⇒ 画面 の流れを理解する。</p>
+        <p></p>
+
+        <h4>## ミドルウェア</h4>
+        <p>- Webサーバ：Apache</p>
+        <p>- 開発言語：Java</p>
+        <p>- データベース：MySQL</p>
+        <p>- フレームワーク：Spring Boot</p>
+        <p>- テンプレートエンジン：Thymeleaf</p>
+        <p>- CSSフレームワーク：Semantic UI</p>
+        <p></p>
+
+        <h4>## 機能要件</h4>
+        <p>社員情報管理システム</p>
+        <p></p>
+
+        <h4>[画面構成]</h4>
+        <p>0.TOP</p>
+        <p>1.社員情報追加</p>
+        <p>2.社員情報編集(確認)</p>
+        <p>3.社員情報一覧表示</p>
+        <p>4.社員情報検索</p>
+        <p>5.社員情報削除</p>
+        <p></p>
+
+    </div>
+</div>
+
+</body>
+</html>
