@@ -58,7 +58,8 @@ https://blog.jetbrains.com/jp/2020/03/24/2872
 https://youtrack.jetbrains.com/issue/IDEA-235472?_ga=2.82989974.1811515303.1589072864-102098850.1585802369#focus=streamItem-27-4080413.0-0
 
 
-
+◆テキスト形式でUMLの図を表現できるPlantUMLをIntelliJ IDEA上で書くための設定
+https://qiita.com/ot-aoyagi/items/d2bfbff219c592822d53
 
 
 ## 機能要件
