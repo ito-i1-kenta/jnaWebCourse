@@ -17,13 +17,45 @@ Webアプリ研修。
 
 ## 導入手順
 
-◆Git for Windowsのインストール、GitHubに接続してみた。
+**1.Git for Windowsのインストール**  
+https://eng-entrance.com/git-install
 
-https://qiita.com/manabu-watanabe/items/ecf1b434baf305adaa00
+**2.GitHubアカウント作成**  
+https://note.com/snmal_jp/n/n3ef510a8181e
 
-◆IntelliJ IDEAとGitHubを連携するときの設定メモ
+**3.公開鍵/秘密鍵の生成＆GitHubに公開鍵登録**  
+https://qiita.com/coffee_g9/items/e1b9ab28cfa54f854308
 
-https://qiita.com/rubytomato@github/items/b2ca27712146ed6f1426
+**4.Gradleのダウンロード**  
+https://qiita.com/quwahara/items/9c4e5fbda421cfcb09ad  
+　・Gradleのバージョンはv6.3を指定する  
+
+**5.IntelliJのインストール**  
+https://sukkiri.jp/technologies/ides/intellij-idea/intellij-idea-win.html  
+　・「step2 IntelliJ IDEAのダウンロード」ではCommunity版を選択。
+
+　・「step4 IntelliJ IDEAの日本語化」の実施は任意です。  
+　　ただし日本語化すると処理速度が落ちるので注意が必要。
+
+　・「step5 IntelliJ IDEAの実行」は以下の手順を実施し、Java演習で使用したフォルダを指定しましょう。  
+　　①選択肢の「開く(OPEN)」を選択  
+　　②Java演習で使用したフォルダを指定  
+　　　例)C:\workspace\Java\Study  
+　　③college.intro1などのパッケージが存在することを確認
+
+**6.Javaの環境変数を設定**  
+TODO: 新卒展開フォルダに置いたらURL修正  
+https://drive.google.com/drive/u/0/folders/1-hziRiKAzK1DCX4gBubwCoOdgYQagrJw  
+　・06.環境変数の設定.pptx 参照
+
+**7.IntelliJとGitHubの連携**  
+https://www.task-notes.com/entry/20160511/1462935600  
+　・上記URLのGitコマンド確認、GitHub認証を参照  
+
+**8.jnaWebCourseをクローン & アプリ起動**  
+TODO: 新卒展開フォルダに置いたらURL修正  
+https://drive.google.com/drive/u/0/folders/1-hziRiKAzK1DCX4gBubwCoOdgYQagrJw  
+　・08.Webアプリ講座起動手順書.pptx 参照
 
 ## 機能要件
 社員情報管理システム
