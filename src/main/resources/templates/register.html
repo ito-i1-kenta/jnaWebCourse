@@ -14,67 +14,119 @@
     <!-- semantic.js  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
 
+    <script th:src="@{/js/register.js}"></script>
+
 </head>
 
 <body>
 <!-- th:replaceを使用して、 メニュー用のフラグメントを読込みます -->
 <div th:replace="common/menu :: menu_fragment"></div>
 
-<div class="ui container">
-    <form class="ui form">
+<div class="ui container" th:object="${registerRequest}">
+
+    <div class="ui error message" th:if="${#fields.hasErrors('*')}">
+        <div class="header">
+            エラー
+        </div>
+        <ul class="list">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+        </ul>
+    </div>
+
+    <div class="ui success message" th:if="${complete}">
+        <div class="header">
+            成功
+        </div>
+        <p th:text="#{register.complete}"></p>
+    </div>
+
+    <form class="ui form" enctype="multipart/form-data" method="post" th:action="@{/register}">
         <div class="ui grid">
             <div class="twelve wide column">
                 <div class="row">
-                    <div class="field">
-                        <label>First Name</label>
-                        <input type="text" name="first-name" placeholder="First Name">
+                    <div class="required field">
+                        <label>社員番号</label>
+                        <input type="text" th:field="*{empNo}" placeholder="6桁で入力してください。">
+                    </div>
+
+                    <div class="required field">
+                        <label>氏名</label>
+                        <input type="text" th:field="*{userName}" placeholder="入力してください。">
+                    </div>
+
+                    <div class="required field">
+                        <label>パスワード</label>
+                        <input type="password" th:field="*{password}" placeholder="入力してください。">
                     </div>
                 </div>
 
                 <div class="row">
-                    <p>Lorem Ipsum(略)</p>
-                </div>
-                <div class="row">
-                    <p>Lorem Ipsum(略)</p>
-                </div>
-                <div class="row">
-                    <p>Lorem Ipsum(略)</p>
-                </div>
-                <div class="row">
-                    <p>Lorem Ipsum(略)</p>
-                </div>
-                <div class="row">
-                    <p>Lorem Ipsum(略)</p>
-                </div>
-            </div>
-            <div class="four wide column">
-                <img class="ui medium circular image" src="/images/square-image.png">
-            </div>
-
-
-        </div>
-        <div class="ui three column　grid">
-            <div class="two column row">
-                <div class="colmun">
                     <div class="field">
-                        <label>First Name</label>
-                        <input type="text" name="first-name" placeholder="First Name">
-                    </div>
-                    <div class="field">
-                        <label>Last Name</label>
-                        <input type="text" name="last-name" placeholder="Last Name">
-                    </div>
-                    <div class="field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" tabindex="0" class="hidden">
-                            <label>I agree to the Terms and Conditions</label>
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" id="password-check">
+                            <label>パスワードを表示</label>
                         </div>
                     </div>
-                    <button class="ui button" type="submit">Submit</button>
+
+                    <div class="field">
+                        <label>生年月日</label>
+                        <input type="date" th:field="*{birthDate}" placeholder="入力してください。">
+                    </div>
+
+                    <div class="grouped fields">
+                        <div class="required field">
+                            <label>性別</label>
+                        </div>
+                        <div class="ui slider checkbox" th:each="item : ${sexItemList}">
+                            <input type="radio" th:value="${item.sexId}" th:field="*{sex}"/>
+                            <label th:text="${item.sexName}"></label>
+                        </div>
+                    </div>
+
+                    <div class="required field">
+                        <label>出身地</label>
+                        <select class="ui search dropdown" th:field="*{birthPlace}">
+                            <option value="">選択してください</option>
+                            <option th:each="item : ${birthPlaceList}" th:value="${item.placeId}">
+                                [[${item.placeName}]]
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>ニックネーム</label>
+                        <input type="text" th:field="*{nickName}" placeholder="入力してください。">
+                    </div>
+
+                    <div class="required field">
+                        <label>配属先</label>
+                        <select class="ui search dropdown" th:field="*{assignee}">
+                            <option value="">選択してください</option>
+                            <option th:each="item : ${assigneeList}" th:value="${item.key}">[[${item.value}]]</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="four wide column">
+                <img class="ui medium circular image" id="dragdroparea" th:src="${photo}">
+                <div class="ui pointing label">
+                    画像をドラッグ＆ドロップしてください
+                </div>
+                <input type="hidden" th:field="*{photo}">
+            </div>
+
+            <div class="ui sixteen wide column">
+                <div class="row">
+                    <div class="ui fluid divider"></div>
+                </div>
+                <div class="row">
+                    <button class="ui green button">登録</button>
                 </div>
             </div>
-            <div class="column">
-            </div>
+
         </div>
     </form>
 </div>
