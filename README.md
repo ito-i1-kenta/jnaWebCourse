@@ -49,8 +49,7 @@ https://sukkiri.jp/technologies/ides/intellij-idea/intellij-idea-win.html
 　　③college.intro1などのパッケージが存在することを確認
 
 **6.Javaの環境変数を設定**  
-TODO: 新卒展開フォルダに置いたらURL修正  
-https://drive.google.com/drive/u/0/folders/1-hziRiKAzK1DCX4gBubwCoOdgYQagrJw  
+https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ  
 　・06.環境変数の設定.pptx 参照
 
 **7.IntelliJとGitHubの連携**  
@@ -58,39 +57,8 @@ https://www.task-notes.com/entry/20160511/1462935600
 　・上記URLのGitコマンド確認、GitHub認証を参照  
 
 **8.jnaWebCourseをクローン & アプリ起動**  
-TODO: 新卒展開フォルダに置いたらURL修正  
-https://drive.google.com/drive/u/0/folders/1-hziRiKAzK1DCX4gBubwCoOdgYQagrJw  
+https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ  
 　・08.Webアプリ講座起動手順書.pptx 参照
-
-◆lombokを有効にする
-
-IntellijのSettingダイアログを開く。
-
-(1) Plugin
-
-    Settings>Plugins>Browse Repository>"lombok"でみつかるのでそれをinstall。version v0.14.16
-
-(2) IDEAをrestart
-(3) Annotation Processorを有効に
-   
-    Settings>Build, Execution, Deployment>Compiler>Annotation ProcessorsでEnable annotation processingにチェック。
-
-◆ログなどの文字化け対応
-
-idea64.exe.vmoptionsファイルに以下を記述すると、Intellijが起動しなくなる。
-
-2020/03時点のアップデートから発生するそう。
-
-    -Dfile.encoding=UTF-8
-
-対応方法
-https://blog.jetbrains.com/jp/2020/03/24/2872
-
-対応方法詳細
-https://youtrack.jetbrains.com/issue/IDEA-235472?_ga=2.82989974.1811515303.1589072864-102098850.1585802369#focus=streamItem-27-4080413.0-0
-
-
-
 
 
 ## 機能要件
