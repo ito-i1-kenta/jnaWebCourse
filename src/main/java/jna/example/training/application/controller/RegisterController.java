@@ -34,7 +34,6 @@ public class RegisterController {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
-
     @GetMapping("/register")
     public String init(@ModelAttribute RegisterRequest registerRequest, Model model) {
         return "register";
@@ -60,9 +59,7 @@ public class RegisterController {
 
         // 登録処理
         registerService.register(resource);
-
         model.addAttribute("complete", messageSource.getMessage("register.complete", null, Locale.JAPAN));
-
 
         return "register";
     }
@@ -70,7 +67,6 @@ public class RegisterController {
     @PostMapping("/upload")
     @ResponseBody
     public String upload(@RequestParam("files") List<MultipartFile> files, @ModelAttribute RegisterRequest registerRequest, Model model) {
-
         StringBuffer data = new StringBuffer();
         try {
             String base64 = new String(Base64.getEncoder().encode(files.get(0).getBytes()));
@@ -80,8 +76,6 @@ public class RegisterController {
         } catch (Exception ex) {
 
         }
-
-        //registerRequest.setPhoto(files.get(0));
 
         return data.toString();
     }

@@ -1,0 +1,56 @@
+@startuml
+title 社員情報登録画面フロー
+
+Actor "操作者" as User
+
+User -> 社員情報登録画面
+
+activate 社員情報登録画面
+社員情報登録画面 -> RegisterController
+deactivate 社員情報登録画面
+
+activate RegisterController
+    alt 入力チェック
+        RegisterController -> 社員情報登録画面 : バリデーションエラー
+        activate 社員情報登録画面
+        User <- 社員情報登録画面 : 入力内容の不備を表示
+        deactivate 社員情報登録画面
+    end
+RegisterController -> RegisterService
+deactivate RegisterController
+
+activate RegisterService
+RegisterService -> 各種mapper
+deactivate RegisterService
+
+activate 各種mapper
+各種mapper -> DB
+deactivate 各種mapper
+
+activate DB
+    alt 同一主キー（社員番号）の登録
+        DB -> 社員情報登録画面 : 409エラー キー重複登録
+        activate 社員情報登録画面
+        User <- 社員情報登録画面 : 現状、エラー情報表示
+        deactivate 社員情報登録画面
+    end
+各種mapper <- DB
+deactivate DB
+
+activate 各種mapper
+RegisterService <- 各種mapper
+deactivate 各種mapper
+
+activate RegisterService
+RegisterController <- RegisterService
+deactivate RegisterService
+
+activate RegisterController
+社員情報登録画面 <- RegisterController
+deactivate RegisterController
+
+activate 社員情報登録画面
+User <- 社員情報登録画面
+deactivate 社員情報登録画面
+
+@enduml

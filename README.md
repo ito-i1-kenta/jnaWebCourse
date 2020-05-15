@@ -60,6 +60,21 @@ https://www.task-notes.com/entry/20160511/1462935600
 https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ  
 　・08.Webアプリ講座起動手順書.pptx 参照
 
+idea64.exe.vmoptionsファイルに以下を記述すると、Intellijが起動しなくなる。
+
+2020/03時点のアップデートから発生するそう。
+
+    -Dfile.encoding=UTF-8
+
+対応方法
+https://blog.jetbrains.com/jp/2020/03/24/2872
+
+対応方法詳細
+https://youtrack.jetbrains.com/issue/IDEA-235472?_ga=2.82989974.1811515303.1589072864-102098850.1585802369#focus=streamItem-27-4080413.0-0
+
+
+
+
 
 ## 機能要件
 社員情報管理システム
@@ -92,6 +107,12 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
 	DB定義書
 	クラス図/構成図(今回無し)
 	→クラス図の作成は求めないが、MVCに則った実装を行うこと。
+
+◆シーケンス図
+
+【社員情報登録画面】
+
+![社員情報登録画面](https://user-images.githubusercontent.com/64938514/82010133-31119a80-96ac-11ea-8ac3-a2c1efe132af.png)
 
 2.実装
 
