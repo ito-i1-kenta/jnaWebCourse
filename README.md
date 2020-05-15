@@ -94,6 +94,12 @@ https://qiita.com/ot-aoyagi/items/d2bfbff219c592822d53
 	クラス図/構成図(今回無し)
 	→クラス図の作成は求めないが、MVCに則った実装を行うこと。
 
+◆シーケンス図
+
+【社員情報登録画面】
+
+![社員情報登録画面](https://user-images.githubusercontent.com/64938514/82010133-31119a80-96ac-11ea-8ac3-a2c1efe132af.png)
+
 2.実装
 
 	ソースコード
