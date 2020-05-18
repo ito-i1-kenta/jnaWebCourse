@@ -22,44 +22,46 @@ Webアプリ研修。
 
 ## 導入手順
 
-◆Git for Windowsのインストール、GitHubに接続してみた。
+**1.Git for Windowsのインストール**  
+https://eng-entrance.com/git-install
 
-https://qiita.com/manabu-watanabe/items/ecf1b434baf305adaa00
+**2.GitHubアカウント作成**  
+https://note.com/snmal_jp/n/n3ef510a8181e
 
-◆IntelliJ IDEAとGitHubを連携するときの設定メモ
+**3.公開鍵/秘密鍵の生成＆GitHubに公開鍵登録**  
+https://qiita.com/coffee_g9/items/e1b9ab28cfa54f854308
 
-https://qiita.com/rubytomato@github/items/b2ca27712146ed6f1426
+**4.Gradleのダウンロード**  
+https://qiita.com/quwahara/items/9c4e5fbda421cfcb09ad  
+　・Gradleのバージョンはv6.3を指定する  
 
-◆lombokを有効にする
+**5.IntelliJのインストール**  
+https://sukkiri.jp/technologies/ides/intellij-idea/intellij-idea-win.html  
+　・「step2 IntelliJ IDEAのダウンロード」ではCommunity版を選択。
 
-IntellijのSettingダイアログを開く。
+　・「step4 IntelliJ IDEAの日本語化」の実施は任意です。  
+　　ただし日本語化すると処理速度が落ちるので注意が必要。
 
-(1) Plugin
+　・「step5 IntelliJ IDEAの実行」は以下の手順を実施し、Java演習で使用したフォルダを指定しましょう。  
+　　①選択肢の「開く(OPEN)」を選択  
+　　②Java演習で使用したフォルダを指定  
+　　　例)C:\workspace\Java\Study  
+　　③college.intro1などのパッケージが存在することを確認
 
-    Settings>Plugins>Browse Repository>"lombok"でみつかるのでそれをinstall。version v0.14.16
+**6.Javaの環境変数を設定**  
+https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ  
+　・06.環境変数の設定.pptx 参照
 
-(2) IDEAをrestart
-(3) Annotation Processorを有効に
-   
-    Settings>Build, Execution, Deployment>Compiler>Annotation ProcessorsでEnable annotation processingにチェック。
+**7.IntelliJとGitHubの連携**  
+https://www.task-notes.com/entry/20160511/1462935600  
+　・上記URLのGitコマンド確認、GitHub認証を参照  
 
-◆ログなどの文字化け対応
-
-idea64.exe.vmoptionsファイルに以下を記述すると、Intellijが起動しなくなる。
-
-2020/03時点のアップデートから発生するそう。
-
-    -Dfile.encoding=UTF-8
-
-対応方法
-https://blog.jetbrains.com/jp/2020/03/24/2872
-
-対応方法詳細
-https://youtrack.jetbrains.com/issue/IDEA-235472?_ga=2.82989974.1811515303.1589072864-102098850.1585802369#focus=streamItem-27-4080413.0-0
+**8.jnaWebCourseをクローン & アプリ起動**  
+https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ  
+　・08.Webアプリ講座起動手順書.pptx 参照
 
 
-◆テキスト形式でUMLの図を表現できるPlantUMLをIntelliJ IDEA上で書くための設定
-https://qiita.com/ot-aoyagi/items/d2bfbff219c592822d53
+
 
 
 ## 機能要件
