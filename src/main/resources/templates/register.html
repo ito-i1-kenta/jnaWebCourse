@@ -16,6 +16,9 @@
 
     <script th:src="@{/js/register.js}"></script>
 
+    <link th:href="@{/css/register.css}" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -111,7 +114,7 @@
             </div>
 
             <div class="four wide column">
-                <img class="ui medium circular image" id="dragdroparea" th:src="${photo}">
+                <img class="ui medium circular image profile__image" id="dragdroparea" th:src="${photo}">
                 <div class="ui pointing label">
                     画像をドラッグ＆ドロップしてください
                 </div>

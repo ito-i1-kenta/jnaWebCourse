@@ -1,16 +1,18 @@
 <div class="ui inverted segment" xmlns:th="http://www.thymeleaf.org" th:fragment="menu_fragment">
     <script th:src="@{/js/menu.js}"></script>
 
+    <link th:href="@{/css/menu.css}" rel="stylesheet">
+
     <div class="ui inverted secondary pointing menu">
-        <a class="item" href="http://localhost:8080/">
+        <a class="item" href="/">
             <i class="home icon"></i>
             TOP
         </a>
-        <a class="item" href="./viewer">
+        <a class="item" href="/viewer">
             <i class="users icon"></i>
             社員情報一覧
         </a>
-        <a class="item" href="./register">
+        <a class="item" href="/register">
             <i class="edit icon"></i>
             社員情報登録
         </a>

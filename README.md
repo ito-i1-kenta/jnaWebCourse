@@ -61,6 +61,17 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
 　・08.Webアプリ講座起動手順書.pptx 参照
 
 
+## 知識
+
+- フレームワーク：Spring Boot
+
+- データベース：MySQL
+
+- O/Rマッパー：MyBatis
+
+- テンプレートエンジン：Thymeleaf
+
+- CSSフレームワーク：Semantic UI
 
 
 
@@ -69,12 +80,12 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
 
     [画面構成]
     0.TOP
-	1.社員情報追加
-	2.社員情報編集(確認)
-	3.社員情報一覧表示
-	4.社員情報検索
-	5.社員情報削除
-
+	1.社員情報登録
+	2.社員情報一覧検索
+	3.社員情報詳細
+	4.社員情報削除
+    5.社員情報編集
+	
 ## その他
 1.画面イメージ/画面遷移	
 
@@ -92,26 +103,23 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
 ## アプトプット
 1.設計
 
+	シーケンス図
+	API（？）
 	DB定義書
 	クラス図/構成図(今回無し)
 	→クラス図の作成は求めないが、MVCに則った実装を行うこと。
 
-◆シーケンス図
-
-【社員情報登録画面】
-
-![社員情報登録画面](https://user-images.githubusercontent.com/64938514/82010133-31119a80-96ac-11ea-8ac3-a2c1efe132af.png)
-
 2.実装
 
 	ソースコード
+
 3.試験
 
 	試験項目マトリクス
 	試験項目書
 	エビデンス等
 	
-## パッケージ構成
+## ソースコードのパッケージ構成
 
 ***
 **Application層**
@@ -151,7 +159,23 @@ mapper
 
     DBアクセス。
 
-## DBのテーブル設計
+## 設計
+### シーケンス図
+
+【社員情報登録画面】
+
+![社員情報登録画面](https://user-images.githubusercontent.com/64938514/82010133-31119a80-96ac-11ea-8ac3-a2c1efe132af.png)
+
+### API
+
+|画面|API名|メソッド|エントリポイント|画面内のみで使用しているエントリポイント|備考|
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| TOP | - | - | - | - | - |
+| 社員情報登録 | 社員情報登録API | POST | /register | - | - |
+| | | POST | | /upload | - | -|
+| 社員情報一覧 | 社員情報一覧検索API | GET | /viewer/search | - | - |
+
+### DB定義書
 
 ◆t_EMPLOYEE（社員情報）テーブル
 
@@ -275,9 +299,27 @@ mapper
 
 ## 課題1
 
-◆配属先一覧をDBから取得する用に修正せよ
+社員情報登録画面の配属先リストはプログラムで固定文字列を設定している。
+
+固定文字列ではなく、DBから取得して表示に修正せよ。
+
+【作成物】
+
+    ◆ テーブル定義書
+    　　・配属先一覧のテーブル
+    　　・DDL、DML
+    
+    ◆　ソースコード
+    　　・実装
+    　　・単体試験
+        
+    ◆　試験
+    　　・試験項目マトリクス
+    　　・試験項目書
+    　　・試験実施エビデンス
+
+## 課題2
+
+社員情報一覧画面の検索の何か
 
 
-## Author
-
-[tcnksm](https://github.com/tcnksm)

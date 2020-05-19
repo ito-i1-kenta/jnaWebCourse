@@ -1,7 +1,10 @@
 package jna.example.training.domain.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-public interface ViewerService {
+@Service
+@AllArgsConstructor
+public class ViewerService {
 
 }
