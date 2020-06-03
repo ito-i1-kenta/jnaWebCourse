@@ -15,8 +15,11 @@ public class EmployeeEntity extends CommonEntity {
     private String password;
     private LocalDate birthDate;
     private int sexId;
+    private String sexName;
     private int birthPlaceId;
+    private String birthPlaceName;
     private String nickName;
     private int assigneeId;
+    private String assigneeName;
     private byte[] photo;
 }

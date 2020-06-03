@@ -1,4 +1,6 @@
 $(function () {
+
+  // 画像アップロード
   function sendFileToServer(formData, status) {
     var uploadURL = "/upload"; //Upload URL
     $.ajax({
@@ -36,6 +38,7 @@ $(function () {
     }
     sendFileToServer(fd, status);
   }
+
   $(document).ready(function () {
     const pwd = document.getElementById('password');
     const pwdCheck = document.getElementById('password-check');
@@ -73,5 +76,8 @@ $(function () {
       e.stopPropagation();
       e.preventDefault();
     });
+
   });
+
+
 });

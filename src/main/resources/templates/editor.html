@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>編集</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <!-- semantic.css  -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+
+    <!-- semantic.js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
+    <script th:src="@{/js/register.js}"></script>
+
+    <link th:href="@{/css/register.css}" rel="stylesheet">
+
+
+</head>
+
+<body>
+<!-- th:replaceを使用して、 メニュー用のフラグメントを読込みます -->
+<div th:replace="common/menu :: menu_fragment"></div>
+
+<div class="ui container" th:object="${editorRequest}">
+
+    <div class="ui error message" th:if="${#fields.hasErrors('*')}">
+        <div class="header">
+            エラー
+        </div>
+        <ul class="list">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+        </ul>
+    </div>
+
+    <div class="ui success message" th:if="${complete}">
+        <div class="header">
+            成功
+        </div>
+        <p th:text="#{editor.complete}"></p>
+    </div>
+
+    <form class="ui form" enctype="multipart/form-data" method="post" th:action="@{/editor}">
+        <div class="ui grid">
+            <div class="twelve wide column">
+                <div class="row">
+                    <div class="required field">
+                        <label>社員番号</label>
+                        <input type="text" th:field="*{empNo}" placeholder="6桁で入力してください。">
+                    </div>
+
+                    <div class="required field">
+                        <label>氏名</label>
+                        <input type="text" th:field="*{userName}" placeholder="入力してください。">
+                    </div>
+
+                    <div class="required field">
+                        <label>パスワード</label>
+                        <input type="password" id="password" name="password"
+                               th:value="*{password}" placeholder="入力してください。">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" id="password-check">
+                            <label>パスワードを表示</label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>生年月日</label>
+                        <input type="date" id="birthDate" name="birthDate"
+                               th:value="*{birthDate}" placeholder="入力してください。">
+                    </div>
+
+                    <div class="grouped fields">
+                        <div class="required field">
+                            <label>性別</label>
+                        </div>
+                        <div class="ui slider checkbox" th:each="item : ${sexItemList}">
+                            <input type="radio" th:value="${item.sexId}" th:field="*{sex}"/>
+                            <label th:text="${item.sexName}"></label>
+                        </div>
+                    </div>
+
+                    <div class="required field">
+                        <label>出身地</label>
+                        <select class="ui search dropdown" th:field="*{birthPlace}">
+                            <option value="">選択してください</option>
+                            <option th:each="item : ${birthPlaceList}" th:value="${item.placeId}">
+                                [[${item.placeName}]]
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>ニックネーム</label>
+                        <input type="text" th:field="*{nickName}" placeholder="入力してください。">
+                    </div>
+
+                    <div class="required field">
+                        <label>配属先</label>
+                        <select class="ui search dropdown" th:field="*{assignee}">
+                            <option value="">選択してください</option>
+                            <option th:each="item : ${assigneeList}" th:value="${item.key}">[[${item.value}]]</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="four wide column">
+                <img class="ui medium circular image profile__image" id="dragdroparea"
+                     th:src="*{photo != null} ? *{photo} : '/images/square-image.png'">
+                <div class="ui pointing label">
+                    画像をドラッグ＆ドロップしてください
+                </div>
+                <input type="hidden" th:field="*{photo}">
+            </div>
+
+            <div class="ui sixteen wide column">
+                <div class="row">
+                    <div class="ui fluid divider"></div>
+                </div>
+                <div class="row">
+                    <button class="ui green button">更新</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

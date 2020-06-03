@@ -3,6 +3,66 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jna.example.training.infrastructure.mapper.EmployeeMapper">
+
+    <select id="search" resultType="jna.example.training.infrastructure.entity.EmployeeEntity">
+        SELECT
+            t_emp.emp_no,
+            t_emp.user_name,
+            t_emp.password,
+            t_emp.birth_date,
+            t_emp.sex_id,
+            m_sex.sex_name,
+            t_emp.birth_place_id,
+            m_pre.place_name,
+            t_emp.nick_name,
+            t_emp.assignee_id,
+            null,
+            t_emp.photo,
+            t_emp.update_at,
+            t_emp.create_at
+        FROM
+            t_employee AS t_emp
+            ,m_sex AS m_sex
+            ,m_prefectures AS m_pre
+        where
+            t_emp.sex_id = m_sex.sex_id
+            AND t_emp.birth_place_id = m_pre.place_id
+            <if test="empNo != ''">
+                AND t_emp.emp_no like '%${empNo}%'
+            </if>
+            <if test="userName != ''">
+                AND t_emp.user_name like '%${userName}%'
+            </if>
+    </select>
+
+    <select id="searchById" resultType="jna.example.training.infrastructure.entity.EmployeeEntity">
+        SELECT
+        t_emp.emp_no,
+        t_emp.user_name,
+        t_emp.password,
+        t_emp.birth_date,
+        t_emp.sex_id,
+        m_sex.sex_name,
+        t_emp.birth_place_id,
+        m_pre.place_name,
+        t_emp.nick_name,
+        t_emp.assignee_id,
+        null,
+        t_emp.photo,
+        t_emp.update_at,
+        t_emp.create_at
+        FROM
+        t_employee AS t_emp
+        ,m_sex AS m_sex
+        ,m_prefectures AS m_pre
+        where
+        t_emp.sex_id = m_sex.sex_id
+        AND t_emp.birth_place_id = m_pre.place_id
+        <if test="empNo != ''">
+            AND t_emp.emp_no like '%${empNo}%'
+        </if>
+    </select>
+
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_employee
         (

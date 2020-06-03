@@ -3,28 +3,27 @@ package jna.example.training.application.resource;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
-public class ViewerResponse {
-    private List<Response> responseList;
+public class EditorResponse {
+    private Response response;
 
-    public void factory(List<ViewerResponseResource> viewerResponseResource) {
-        this.responseList = viewerResponseResource.stream().map(val -> factoryResponse(val)).collect(Collectors.toList());
+    public void factory(EditorResponseResource responseResource) {
+        this.response = factoryResponse(responseResource);
     }
 
-    private Response factoryResponse(ViewerResponseResource resource) {
+    private Response factoryResponse(EditorResponseResource resource) {
         return new Response(
                 resource.getEmpNo().getEmpNo(),
                 resource.getUserName().getUserName(),
+                resource.getPassword().getPassword(),
                 Optional.ofNullable(resource.getBirthDate()).map(val -> val.getBirthDate().toString()).orElse(null),
-                resource.getSexName().getSexName(),
-                resource.getBirthPlaceName().getBirthPlaceName(),
+                resource.getSexId().getSex(),
+                resource.getBirthPlaceId().getBirthPlace(),
                 Optional.ofNullable(resource.getNickName()).map(val -> val.getNickName()).orElse(null),
-                Optional.ofNullable(resource.getAssigneeName()).map(val -> val.getAssigneeName()).orElse(null),
+                resource.getAssigneeId().getAssignee(),
                 Optional.ofNullable(resource.getPhoto()).map(val -> val.getPhoto()).orElse(null)
         );
     }
@@ -34,11 +33,12 @@ public class ViewerResponse {
     private class Response {
         private String empNo;
         private String userName;
+        private String password;
         private String birthDate;
-        private String sexName;
-        private String birthPlaceName;
+        private int sexId;
+        private int birthPlaceId;
         private String nickName;
-        private String assigneeName;
+        private int assigneeId;
         private String photo;
     }
 

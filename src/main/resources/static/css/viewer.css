@@ -7,3 +7,8 @@
     width: 40px;
     object-fit: cover;
 }
+
+.modal__p {
+    margin-left:50px !important;
+    font-size: large !important;
+}

@@ -39,6 +39,13 @@
         </ul>
     </div>
 
+    <div class="ui success message" th:if="${complete}">
+        <div class="header">
+            成功
+        </div>
+        <p th:text="#{delete.complete}"></p>
+    </div>
+
     <form class="ui form" method="get" th:action="@{/viewer/search}">
 
         <h4 class="ui dividing header">
@@ -89,13 +96,15 @@
                         <th>出身地</th>
                         <th>ニックネーム</th>
                         <th>配属先</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="response, responseStat : ${viewerResponse.responseList}">
                         <td th:text="${responseStat.count}"></td>
                         <td><img class="ui Tiny circular image profile__image"
-                                 th:src="${response.getPhoto() != null} ? ${response.getPhoto()} : '/images/square-image.png'"></td>
+                                 th:src="${response.getPhoto() != null} ? ${response.getPhoto()} : '/images/square-image.png'">
+                        </td>
                         <td th:text="${response.getEmpNo()}"></td>
                         <td th:text="${response.getUserName()}"></td>
                         <td th:text="${response.getBirthDate() != null} ? ${response.getBirthDate()} : '-'"></td>
@@ -103,12 +112,51 @@
                         <td th:text="${response.getBirthPlaceName()}"></td>
                         <td th:text="${response.getNickName() != null} ? ${response.getNickName()} : '-'"></td>
                         <td th:text="${response.getAssigneeName()}"></td>
+                        <td>
+                            <div class="ui buttons">
+                                <button type="button" class="ui orange button"
+                                        th:attr="onclick='window.location.href=\'/editor/' + ${response.getEmpNo()} + '\''">
+                                    編集
+                                </button>
+                                <div class="or"></div>
+                                <button type="button" class="ui red button" name="deleteModal"
+                                        th:data-id="${response.getEmpNo()}"
+                                        th:data-userName="${response.getUserName()}">削除
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
 
             </div>
 
+        </div>
+    </form>
+
+    <!-- action属性はjsファイルで動的に変更 -->
+    <form name="formModal" method="GET">
+        <div class="ui basic modal">
+            <div class="ui icon header">
+                <i class="trash alternate icon"></i>
+                削除しますか？
+            </div>
+            <div class="content">
+                <p class="modal__p" id="delEmpNo"/>
+                <p class="modal__p" id="delUserName"/>
+            </div>
+            <div class="actions">
+                <div class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    キャンセル
+                </div>
+                <a href="javascript:formModal.submit()">
+                    <div class="ui green ok inverted button">
+                        <i class="checkmark icon"></i>
+                        削除
+                    </div>
+                </a>
+            </div>
         </div>
     </form>
 
