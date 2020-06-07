@@ -3,7 +3,15 @@ package jna.example.training.application.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jna.example.training.application.resource.RegisterRequest;
 import jna.example.training.application.resource.RegisterResource;
-import jna.example.training.domain.object.*;
+import jna.example.training.domain.object.AssigneeId;
+import jna.example.training.domain.object.BirthDate;
+import jna.example.training.domain.object.BirthPlaceId;
+import jna.example.training.domain.object.EmpNo;
+import jna.example.training.domain.object.NickName;
+import jna.example.training.domain.object.Password;
+import jna.example.training.domain.object.Photo;
+import jna.example.training.domain.object.SexId;
+import jna.example.training.domain.object.UserName;
 import jna.example.training.domain.service.RegisterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,8 +25,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -30,7 +40,7 @@ public class RegisterControllerTest {
 
     // Controller 内で DI している Service は mock にする
     @MockBean
-    private RegisterService registerService = spy(RegisterService.class);
+    private RegisterService registerService;
 
     @Autowired
     RegisterController target;
@@ -39,7 +49,10 @@ public class RegisterControllerTest {
 
     @BeforeEach
     public void setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(target).build();
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/jsp/view/");
+        viewResolver.setSuffix(".jsp");
+        mockMvc = MockMvcBuilders.standaloneSetup(target).setViewResolvers(viewResolver).build();
         mapper = new ObjectMapper();
     }
 
@@ -71,7 +84,8 @@ public class RegisterControllerTest {
         );
         doNothing().when(registerService).register(resource);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/register").content(mapper.writeValueAsString(registerRequest)))
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .flashAttr("registerRequest", registerRequest))
 
                 // レスポンスのステータスコードが200であることを検証する
                 .andExpect(status().isOk());
