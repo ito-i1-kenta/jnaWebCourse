@@ -17,8 +17,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -30,7 +32,7 @@ public class RegisterControllerTest {
 
     // Controller 内で DI している Service は mock にする
     @MockBean
-    private RegisterService registerService = spy(RegisterService.class);
+    private RegisterService registerService;
 
     @Autowired
     RegisterController target;
@@ -39,13 +41,16 @@ public class RegisterControllerTest {
 
     @BeforeEach
     public void setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(target).build();
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/jsp/view/");
+        viewResolver.setSuffix(".jsp");
+        mockMvc = MockMvcBuilders.standaloneSetup(target).setViewResolvers(viewResolver).build();
         mapper = new ObjectMapper();
     }
 
-    @DisplayName("Test Spring @Autowired Integration")
+    @DisplayName("Normal Test")
     @Test
-    public void testGet__Ok() throws Exception {
+    public void normal_test() throws Exception {
 
         RegisterRequest registerRequest = new RegisterRequest();
         registerRequest.empNo = "012345";
@@ -71,17 +76,11 @@ public class RegisterControllerTest {
         );
         doNothing().when(registerService).register(resource);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/register").content(mapper.writeValueAsString(registerRequest)))
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .flashAttr("registerRequest", registerRequest))
 
                 // レスポンスのステータスコードが200であることを検証する
                 .andExpect(status().isOk());
-
-
-//        mockMvc.perform(MockMvcRequestBuilders.get("/register"))
-//                // レスポンスのステータスコードが200であることを検証する
-//                .andExpect(status().isOk())
-//                // レスポンスボディが「Hello World」であることを検証する
-//                .andExpect(content().string("Hello World"));
 
         verify(registerService).register(resource);
     }
