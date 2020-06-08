@@ -39,21 +39,32 @@ public class EditorController {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
+    /*
+        初期表示
+     */
     @GetMapping("/editor/{empNo}")
     public String init(@Validated @PathVariable(name = "empNo") @Pattern(regexp = "[0-9]{6}") String empNo,
                        @ModelAttribute EditorRequest editorRequest,
                        Model model) {
 
+        // 検索処理
         EditorResponseResource resource = viewerService.searchById(EmpNo.of(empNo));
+
+        // レスポンス値の設定
         editorRequest.factory(resource);
 
+        // editor.htmlの呼び出し
         return "editor";
     }
 
+    /*
+        社員情報編集API
+     */
     @PostMapping("/editor")
     public String editor(@Validated @ModelAttribute EditorRequest editorRequest,
                          BindingResult result,
                          Model model) {
+        // バリデーションエラー判定
         if (result.hasErrors()) {
             return "editor";
         }
@@ -61,21 +72,31 @@ public class EditorController {
         // TODO:更新処理
 
 
+        // 画面に表示する属性設定
         model.addAttribute("complete", messageSource.getMessage("editor.complete", null, Locale.JAPAN));
 
         return "editor";
     }
 
+    /*
+        性別リスト
+     */
     @ModelAttribute("sexItemList")
     public List<SexEntity> sexItemList() {
         return registerService.getSexList();
     }
 
+    /*
+        出身地リスト
+     */
     @ModelAttribute("birthPlaceList")
     public List<PrefecturesEntity> birthPlaceList() {
         return registerService.getPrefecturesList();
     }
 
+    /*
+        配属先リスト
+     */
     @ModelAttribute("assigneeList")
     public HashMap<String, String> assigneeList() {
         return new LinkedHashMap<String, String>() {{

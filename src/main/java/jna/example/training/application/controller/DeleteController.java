@@ -17,14 +17,20 @@ public class DeleteController {
 
     protected final MessageSource messageSource;
 
+    /*
+        社員情報削除API
+     */
     @GetMapping("/delete/{empNo}")
-    public String delete(@Valid @PathVariable(name = "empNo") @Pattern(regexp = "[0-9]{6}") String empNo, RedirectAttributes attributes) {
+    public String delete(@Valid @PathVariable(name = "empNo") @Pattern(regexp = "[0-9]{6}") String empNo,
+                         RedirectAttributes attributes) {
 
         // Todo 削除処理
 
 
+        // 画面に表示する属性設定
         attributes.addFlashAttribute("complete", messageSource.getMessage("delete.complete", null, Locale.JAPAN));
 
+        // リダイレクトでviewer.htmlの呼び出し
         return "redirect:/viewer";
     }
 

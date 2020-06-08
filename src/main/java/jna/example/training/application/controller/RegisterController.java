@@ -34,13 +34,21 @@ public class RegisterController {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
+    /*
+        初期表示
+     */
     @GetMapping("/register")
     public String init(@ModelAttribute RegisterRequest registerRequest, Model model) {
+        // register.htmlの呼び出し
         return "register";
     }
 
+    /*
+        社員情報登録API
+     */
     @PostMapping("/register")
     public String register(@Validated @ModelAttribute RegisterRequest registerRequest, BindingResult result, Model model) {
+        // バリデーションエラー判定
         if (result.hasErrors()) {
             return "register";
         }
@@ -59,11 +67,16 @@ public class RegisterController {
 
         // 登録処理
         registerService.register(resource);
+
+        // 画面に表示する属性設定
         model.addAttribute("complete", messageSource.getMessage("register.complete", null, Locale.JAPAN));
 
         return "register";
     }
 
+    /*
+        画像アップロード（ここは興味があれば見る程度でOK）
+     */
     @PostMapping("/upload")
     @ResponseBody
     public String upload(@RequestParam("files") List<MultipartFile> files, @ModelAttribute RegisterRequest registerRequest, Model model) {
@@ -80,21 +93,33 @@ public class RegisterController {
         return data.toString();
     }
 
+    /*
+        プロフィール画像初期値
+     */
     @ModelAttribute("photo")
     public String photoInit(Model model) {
         return "/images/square-image.png";
     }
 
+    /*
+        性別リスト
+     */
     @ModelAttribute("sexItemList")
     public List<SexEntity> sexItemList() {
         return registerService.getSexList();
     }
 
+    /*
+        出身地リスト
+     */
     @ModelAttribute("birthPlaceList")
     public List<PrefecturesEntity> birthPlaceList() {
         return registerService.getPrefecturesList();
     }
 
+    /*
+        配属先リスト
+     */
     @ModelAttribute("assigneeList")
     public HashMap<String, String> assigneeList() {
         return new LinkedHashMap<String, String>() {{
