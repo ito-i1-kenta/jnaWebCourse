@@ -1,0 +1,44 @@
+@startuml
+title 社員情報一覧画面（検索）フロー
+
+Actor "操作者" as User
+
+User -> 社員情報一覧画面
+
+activate 社員情報一覧画面
+社員情報一覧画面 -> ViewerController
+deactivate 社員情報一覧画面
+
+activate ViewerController
+ViewerController -> ViewerService
+deactivate ViewerController
+
+activate ViewerService
+ViewerService -> 各種mapper
+deactivate ViewerService
+
+activate 各種mapper
+各種mapper -> DB
+deactivate 各種mapper
+
+activate DB
+各種mapper <- DB
+deactivate DB
+
+activate 各種mapper
+ViewerService <- 各種mapper
+deactivate 各種mapper
+
+activate ViewerService
+ViewerController <- ViewerService
+deactivate ViewerService
+
+activate ViewerController
+社員情報一覧画面 <- ViewerController
+deactivate ViewerController
+
+activate 社員情報一覧画面
+User <- 社員情報一覧画面
+deactivate 社員情報一覧画面
+
+@enduml

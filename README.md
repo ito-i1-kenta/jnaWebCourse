@@ -2,7 +2,53 @@ JNA Webアプリ 講座
 ====
 Webアプリ研修。
 
+現場で用いられている技術に触れてみよう！！
 
+# 目次
+
+***[目的・構成・知識](#目的・構成・知識)***
+
+- [課題実施目的](#課題実施目的)
+
+- [ミドルウェア](#ミドルウェア)
+
+- [知識](#知識)
+
+- [ソースコードのパッケージ構成](#ソースコードのパッケージ構成)
+
+***[導入手順・機能要件・アプトプット（制作物）](#導入手順・機能要件・アプトプット（制作物）)***
+
+- [導入手順](#導入手順)
+
+- [機能要件](#機能要件)
+
+- [その他](#その他)
+
+- [アプトプット（制作物）](#アプトプット)
+
+**[設計](#設計)**
+
+- [画面シーケンス図](#画面シーケンス図)
+
+- [API](#API)
+
+- [DB定義書](#DB定義書)
+
+**[課題](#課題)**
+
+- [課題1](#課題1)
+
+- [課題2](#課題2)
+
+- [課題3](#課題3)
+
+- [課題4](#課題4)
+
+- [課題5](#課題5)
+
+- [課題6](#課題6)
+
+# 目的・構成・知識
 ## 課題実施目的
 - MVCモデルを理解する。
 - DB ⇒ API ⇒ 画面 の流れを理解する。
@@ -20,6 +66,74 @@ Webアプリ研修。
 
 　　また、DBのテーブル設計のDDL、DMLを実行済みであること。
 
+
+## ざっくり知識（まずは、へぇ～程度で見る）
+
+- Webアプリケーションの仕組み【特に重要】
+https://www.sejuku.net/blog/1046
+
+- MVCモデル【特に重要】
+https://qiita.com/konkipiano/items/50b22c8fb79aa67a5b71
+
+- フレームワーク：Spring Boot
+https://www.slideshare.net/OgawaTakeshi/spring-boot-71285225
+
+- データベース：MySQL
+http://html2php.starrypages.net/mysql/sql-list
+
+- O/Rマッパー：MyBatis
+https://qiita.com/5zm/items/e1faac61a1d00998fb1f
+
+- テンプレートエンジン：Thymeleaf
+https://www.nttdata.com/jp/ja/data-insight/2019/0805/
+
+- CSSフレームワーク：Semantic UI
+https://qiita.com/Yuta_Fujiwara/items/8abeda1b92dcaf505149
+
+- READMEの書き方（Markdown記法 チートシート）
+https://gist.github.com/mignonstyle/083c9e1651d7734f84c99b8cf49d57fa
+
+## ソースコードのパッケージ構成
+
+***
+**Application層**
+***
+Resource
+
+    リクエストやレスポンスのオブジェクト
+
+Controller
+
+    入出力とサービスのマッピングをする
+
+***
+**Domain層**
+***
+Domain Object（Value Object）
+
+    ビジネスを行う上で必要なモデルを表現するオブジェクト
+
+Service
+
+    ビジネスロジック本体
+
+Exception
+
+    Exceptionたち
+
+***
+Infrastructure層
+***
+
+Entity
+
+    通信時の構造体を表現するオブジェクト
+
+mapper
+
+    DBアクセス。
+   
+# 導入手順・機能要件・アプトプット（制作物） 
 ## 導入手順
 
 **1.Git for Windowsのインストール**  
@@ -61,19 +175,6 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
 　・08.Webアプリ講座起動手順書.pptx 参照
 
 
-## 知識
-
-- フレームワーク：Spring Boot
-
-- データベース：MySQL
-
-- O/Rマッパー：MyBatis
-
-- テンプレートエンジン：Thymeleaf
-
-- CSSフレームワーク：Semantic UI
-
-
 
 ## 機能要件
 社員情報管理システム
@@ -81,7 +182,7 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
     [画面構成]
     0.TOP
 	1.社員情報登録
-	2.社員情報一覧検索（削除可能）
+	2.社員情報一覧（検索・削除）
     3.社員情報編集
 	
 ## その他
@@ -117,54 +218,24 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
 	試験項目書
 	エビデンス等
 	
-## ソースコードのパッケージ構成
 
-***
-**Application層**
-***
-Resource
 
-    リクエストやレスポンスのオブジェクト
-
-Controller
-
-    入出力とサービスのマッピングをする
-
-***
-**Domain層**
-***
-Domain Object（Value Object）
-
-    ビジネスを行う上で必要なモデルを表現するオブジェクト
-
-Service
-
-    ビジネスロジック本体
-
-Exception
-
-    Exceptionたち
-
-***
-Infrastructure層
-***
-
-Entity
-
-    通信時の構造体を表現するオブジェクト
-
-mapper
-
-    DBアクセス。
-
-## 設計
-### シーケンス図
+# 設計
+## 画面シーケンス図
 
 【社員情報登録画面】
-
 ![社員情報登録画面](https://user-images.githubusercontent.com/64938514/82010133-31119a80-96ac-11ea-8ac3-a2c1efe132af.png)
 
-### API
+【社員情報一覧画面（検索）】
+![社員情報一覧画面（検索）](https://user-images.githubusercontent.com/64938514/83995113-74051c00-a993-11ea-95ee-c4407132a16e.png)
+
+【社員情報一覧画面（削除）】
+![社員情報一覧画面（削除）](https://user-images.githubusercontent.com/64938514/83995132-897a4600-a993-11ea-96cb-f4f698d8fbc4.png)
+
+【社員情報編集画面】
+![社員情報編集画面](https://user-images.githubusercontent.com/64938514/83995152-97c86200-a993-11ea-9259-82842117cf2e.png)
+
+## API
 
 |画面|API名|メソッド|エントリポイント|画面内のみで使用しているエントリポイント|備考|
 | ---- | ---- | ---- | ---- | ---- | ---- |
@@ -173,7 +244,10 @@ mapper
 | | | POST | | /upload | - | -|
 | 社員情報一覧 | 社員情報一覧検索API | GET | /viewer/search | - | - |
 
-### DB定義書
+## APIシーケンス図
+
+
+## DB定義書
 
 ◆t_EMPLOYEE（社員情報）テーブル
 
@@ -206,7 +280,7 @@ mapper
 | |PLACE_NAME|名称|VARCHAR(255)|255|〇|
 
 
-**DB初期構築**
+### DB初期構築
 ***
 
     -- DB作成
@@ -295,6 +369,7 @@ mapper
     INSERT INTO `jna`.`m_prefectures` (`PLACE_ID`, `PLACE_NAME`) VALUES (46,'鹿児島');
     INSERT INTO `jna`.`m_prefectures` (`PLACE_ID`, `PLACE_NAME`) VALUES (47,'沖縄');
 
+# 課題
 ## 課題1
 
 以下の画面を開いた時、画面名称がわからない。
@@ -302,7 +377,7 @@ mapper
 そのため、各画面のhtmlファイルに画面名称が表示されるようにしなさい。
 
 	1.社員情報登録
-	2.社員情報一覧検索
+	2.社員情報一覧（検索・削除）
     3.社員情報編集
 
 ## 課題2
@@ -346,7 +421,7 @@ DBのテーブルから削除する処理を実装しなさい。
 
 ## 課題6
 
-【課題2】で作成したテーブルを画面から操作（参照、追加、編集、削除）できるようにせよ。
+【課題2】で作成したマスターテーブルを画面から操作（参照、追加、編集、削除）できるようにせよ。
 
 画面デザインや画面数については各自で考えること。
 

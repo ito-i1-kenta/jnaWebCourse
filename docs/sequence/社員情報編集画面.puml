@@ -1,0 +1,20 @@
+@startuml
+title 社員情報編集画面フロー
+
+Actor "操作者" as User
+
+User -> 社員情報一覧画面
+
+activate 社員情報一覧画面
+社員情報一覧画面 -> EditorController
+deactivate 社員情報一覧画面
+
+activate EditorController
+社員情報一覧画面 <- EditorController
+deactivate EditorController
+
+activate 社員情報一覧画面
+User <- 社員情報一覧画面
+deactivate 社員情報一覧画面
+
+@enduml
