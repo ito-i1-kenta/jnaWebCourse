@@ -65,27 +65,35 @@ Webアプリ研修。
 ## ざっくり知識（まずは、へぇ～程度で見る）
 
 - Webアプリケーションの仕組み【特に重要】
+
 https://www.sejuku.net/blog/1046
 
 - MVCモデル【特に重要】
+
 https://qiita.com/konkipiano/items/50b22c8fb79aa67a5b71
 
 - フレームワーク：Spring Boot
+
 https://www.slideshare.net/OgawaTakeshi/spring-boot-71285225
 
 - データベース：MySQL
+
 http://html2php.starrypages.net/mysql/sql-list
 
 - O/Rマッパー：MyBatis
+
 https://qiita.com/5zm/items/e1faac61a1d00998fb1f
 
 - テンプレートエンジン：Thymeleaf
+
 https://www.nttdata.com/jp/ja/data-insight/2019/0805/
 
 - CSSフレームワーク：Semantic UI
+
 https://qiita.com/Yuta_Fujiwara/items/8abeda1b92dcaf505149
 
 - READMEの書き方（Markdown記法 チートシート）
+
 https://gist.github.com/mignonstyle/083c9e1651d7734f84c99b8cf49d57fa
 
 ## ソースコードのパッケージ構成
