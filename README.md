@@ -26,7 +26,11 @@ Webアプリ研修。
 
 - [アプトプット（制作物）](#アプトプット)
 
+- [結合試験項目書の例](#結合試験項目書の例)
+
 **[設計](#設計)**
+
+- [画面設計](#画面設計)
 
 - [画面シーケンス図](#画面シーケンス図)
 
@@ -227,6 +231,11 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
 - エビデンス
 
 	⇒試験項目書の実施結果をエビデンス（証跡）として作成すること。
+
+### 結合試験項目書の例
+社員情報登録画面
+https://drive.google.com/drive/u/1/folders/1sKlEGVFEqyM7HG4u3G7dRQ9_E5ao7hIw
+
 
 # 設計
 
