@@ -577,7 +577,9 @@ ___
 
 以下の画面を開いた時、画面名称がわからない。
 
-そのため、各画面のhtmlファイルに画面名称が表示されるようにしなさい。
+そのため、各画面のhtmlファイルに手を加え、画面内に画面名称を表示するようにしなさい。
+
+htmlファイルは、「jnaWebCourse\src\main\resources\templates」フォルダ内に存在する。
 
 【作成物】
 
@@ -645,6 +647,7 @@ DBのテーブルから削除する処理を実装しなさい。
 
     - 実装
     - 可能なら単体試験（実装箇所のJUnitを作成）
+    　 「jnaWebCourse\src\test\java\jna\example\training」内に作成。
         
 3. 結合試験
     　　
@@ -667,6 +670,7 @@ DBのテーブルから削除する処理を実装しなさい。
 
     - 実装
     - 可能なら単体試験（実装箇所のJUnitを作成）
+    　 「jnaWebCourse\src\test\java\jna\example\training」内に作成。
         
 3. 結合試験
     　　
@@ -688,6 +692,7 @@ DBのテーブルから削除する処理を実装しなさい。
 
     - 実装
     - 可能なら単体試験（実装箇所のJUnitを作成）
+    　 「jnaWebCourse\src\test\java\jna\example\training」内に作成。
         
 3. 結合試験
     　　
