@@ -126,7 +126,7 @@ Service
     ビジネスロジック本体。
 
 ***
-Infrastructure層
+**Infrastructure層**
 ***
 
 Entity
@@ -137,7 +137,57 @@ Entity
 mapper
 
     DBアクセスするクラス。
-   
+
+***
+**フォルダ構成**
+***
+
+    src
+    ├─main ⇒アプリケーションの実体
+    │  ├─java ⇒Javaのソースコード
+    │  │  └─jna
+    │  │      └─example
+    │  │          └─training
+    │  │              │  
+    │  │              ├─application ⇒Application層
+    │  │              │  ├─controller
+    │  │              │  └─resource
+    │  │              │          
+    │  │              ├─domain ⇒Domain層
+    │  │              │  ├─object
+    │  │              │  └─service
+    │  │              │          
+    │  │              └─infrastructure ⇒Infrastructure層
+    │  │                  ├─entity
+    │  │                  └─mapper
+    │  │                          
+    │  └─resources ⇒Javaのソースコード以外の資源
+    │      │  application.properties
+    │      │  application.yml ⇒アプリケーションの設定ファイル
+    │      │  messages.properties ⇒日本語メッセージのプロパティファイル
+    │      │  
+    │      ├─jna
+    │      │  └─example
+    │      │      └─training
+    │      │          └─infrastructure
+    │      │              └─mapper ⇒Infrastructure層のmapperクラスから呼び出すSQL構文
+    │      │                      
+    │      ├─static
+    │      │  ├─css ⇒Webページのスタイル指定
+    │      │  ├─images ⇒静的画像
+    │      │  └─js ⇒Webページの自作Javascript
+    │      │          
+    │      └─templates ⇒Webページ
+    │          └─common ⇒Webページの共通部品
+    │                  
+    └─test ⇒単体テスト
+        └─java
+            └─jna
+                └─example
+                    └─training
+                        └─application
+                            └─controller
+
 # 導入手順・機能要件・アプトプット（制作物） 
 ## 導入手順
 
