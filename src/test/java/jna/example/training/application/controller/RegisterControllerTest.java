@@ -21,6 +21,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -80,9 +82,49 @@ public class RegisterControllerTest {
                 .flashAttr("registerRequest", registerRequest))
 
                 // レスポンスのステータスコードが200であることを検証する
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(view().name("register"));
 
         verify(registerService).register(resource);
+    }
+
+    @DisplayName("400 validation error")
+    @Test
+    public void test_400_validation_error() throws Exception {
+
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.empNo = "01234500";
+        registerRequest.userName = "テスト";
+        registerRequest.password = "test";
+        registerRequest.birthDate = "2020-06-02";
+        registerRequest.sex = "0";
+        registerRequest.birthPlace = "1";
+        registerRequest.nickName = "テスター";
+        registerRequest.assignee = "1";
+        registerRequest.photo = "";
+
+        RegisterResource resource = RegisterResource.create(
+                EmpNo.of(registerRequest.empNo),
+                UserName.of(registerRequest.userName),
+                Password.of(registerRequest.password),
+                BirthDate.of(registerRequest.birthDate),
+                SexId.of(registerRequest.sex),
+                BirthPlaceId.of(registerRequest.birthPlace),
+                NickName.of(registerRequest.nickName),
+                AssigneeId.of(registerRequest.assignee),
+                Photo.of(registerRequest.photo)
+        );
+        doNothing().when(registerService).register(resource);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .flashAttr("registerRequest", registerRequest))
+                .andExpect(model().hasErrors())
+
+                // レスポンスのステータスコードが200であることを検証する
+                .andExpect(status().isOk())
+                .andExpect(view().name("register"));
+
+        //verify(registerService).register(resource);
     }
 
 }
