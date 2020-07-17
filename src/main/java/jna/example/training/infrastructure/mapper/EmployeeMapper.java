@@ -14,5 +14,4 @@ public interface EmployeeMapper {
 
     void save(EmployeeEntity entity);
 
-    boolean delete(String empNo);
 }

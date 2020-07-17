@@ -26,7 +26,6 @@
 <div th:replace="common/menu :: menu_fragment"></div>
 
 <div class="ui container" th:object="${registerRequest}">
-    <h2 class="header__label">社員情報登録</h2>
 
     <div class="ui error message" th:if="${#fields.hasErrors('*')}">
         <div class="header">

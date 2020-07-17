@@ -27,9 +27,7 @@ public class ViewerService {
 
         List<EmployeeEntity> result = employeeMapper.search(entity);
 
-        return result.stream()
-                .map(this::searchFactory)
-                .collect(Collectors.toList());
+        return result.stream().map(val -> searchFactory(val)).collect(Collectors.toList());
     }
 
     /**
