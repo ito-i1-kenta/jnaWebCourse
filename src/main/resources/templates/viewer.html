@@ -29,6 +29,7 @@
 <div th:replace="common/menu :: menu_fragment"></div>
 
 <div class="ui container" th:object="${viewerSearchRequest}">
+    <h2 class="header__label">社員情報一覧</h2>
 
     <div class="ui error message" th:if="${#fields.hasErrors('*')}">
         <div class="header">
@@ -39,11 +40,11 @@
         </ul>
     </div>
 
-    <div class="ui success message" th:if="${complete}">
+    <div class="ui success message" th:if="${completeResult}">
         <div class="header">
-            成功
+            [[${completeResult}]]
         </div>
-        <p th:text="#{delete.complete}"></p>
+        <p>[[${completeMsg}]]</p>
     </div>
 
     <form class="ui form" method="get" th:action="@{/viewer/search}">

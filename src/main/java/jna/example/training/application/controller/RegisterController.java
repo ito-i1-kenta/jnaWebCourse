@@ -4,6 +4,7 @@ import jna.example.training.application.resource.RegisterRequest;
 import jna.example.training.application.resource.RegisterResource;
 import jna.example.training.domain.object.*;
 import jna.example.training.domain.service.RegisterService;
+import jna.example.training.infrastructure.entity.AssigneeEntity;
 import jna.example.training.infrastructure.entity.PrefecturesEntity;
 import jna.example.training.infrastructure.entity.SexEntity;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -122,16 +124,15 @@ public class RegisterController {
      */
     @ModelAttribute("assigneeList")
     public HashMap<String, String> assigneeList() {
-        return new LinkedHashMap<String, String>() {{
-            put("1", "神奈川営業所");
-            put("2", "新宿営業所");
-            put("3", "大阪営業所");
-            put("4", "福岡営業所");
-            put("5", "仙台営業所");
-            put("6", "宇都宮営業所");
-            put("7", "大宮営業所");
-            put("8", "名古屋営業所");
-        }};
+        List<AssigneeEntity> assigneeEntityList = registerService.getAssigneeList();
+
+        LinkedHashMap<String, String> assigneeMap = new LinkedHashMap<>();
+
+        for (AssigneeEntity entity : assigneeEntityList) {
+            assigneeMap.put(String.valueOf(entity.getAssigneeId()), entity.getAssigneeName());
+        }
+
+        return assigneeMap;
     }
 
 }

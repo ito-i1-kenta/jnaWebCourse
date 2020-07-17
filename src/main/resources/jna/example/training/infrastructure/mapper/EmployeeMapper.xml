@@ -6,33 +6,36 @@
 
     <select id="search" resultType="jna.example.training.infrastructure.entity.EmployeeEntity">
         SELECT
-            t_emp.emp_no,
-            t_emp.user_name,
-            t_emp.password,
-            t_emp.birth_date,
-            t_emp.sex_id,
-            m_sex.sex_name,
-            t_emp.birth_place_id,
-            m_pre.place_name,
-            t_emp.nick_name,
-            t_emp.assignee_id,
-            null,
-            t_emp.photo,
-            t_emp.update_at,
-            t_emp.create_at
+        t_emp.emp_no,
+        t_emp.user_name,
+        t_emp.password,
+        t_emp.birth_date,
+        t_emp.sex_id,
+        m_sex.sex_name,
+        t_emp.birth_place_id,
+        m_pre.place_name,
+        t_emp.nick_name,
+        t_emp.assignee_id,
+        m_ass.assignee_name,
+        t_emp.photo,
+        t_emp.update_at,
+        t_emp.create_at
         FROM
-            t_employee AS t_emp
-            ,m_sex AS m_sex
-            ,m_prefectures AS m_pre
+        t_employee AS t_emp
+        ,m_sex AS m_sex
+        ,m_prefectures AS m_pre
+        ,m_assignee AS m_ass
         where
-            t_emp.sex_id = m_sex.sex_id
-            AND t_emp.birth_place_id = m_pre.place_id
-            <if test="empNo != ''">
-                AND t_emp.emp_no like '%${empNo}%'
-            </if>
-            <if test="userName != ''">
-                AND t_emp.user_name like '%${userName}%'
-            </if>
+        t_emp.sex_id = m_sex.sex_id
+        AND t_emp.birth_place_id = m_pre.place_id
+        AND t_emp.assignee_id = m_ass.assignee_id
+        <if test="empNo != ''">
+            AND t_emp.emp_no like '%${empNo}%'
+        </if>
+        <if test="userName != ''">
+            AND t_emp.user_name like '%${userName}%'
+        </if>
+        order by t_emp.birth_date DESC
     </select>
 
     <select id="searchById" resultType="jna.example.training.infrastructure.entity.EmployeeEntity">
@@ -66,15 +69,15 @@
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_employee
         (
-            emp_no
-            ,user_name
-            ,password
-            ,birth_date
-            ,sex_id
-            ,birth_place_id
-            ,nick_name
-            ,assignee_id
-            ,photo
+        emp_no
+        ,user_name
+        ,password
+        ,birth_date
+        ,sex_id
+        ,birth_place_id
+        ,nick_name
+        ,assignee_id
+        ,photo
         <if test="updateAt != null">
             ,update_at
         </if>
@@ -84,15 +87,15 @@
         )
         VALUES
         (
-            #{empNo}
-            ,#{userName}
-            ,#{password}
-            ,#{birthDate}
-            ,#{sexId}
-            ,#{birthPlaceId}
-            ,#{nickName}
-            ,#{assigneeId}
-            ,#{photo}
+        #{empNo}
+        ,#{userName}
+        ,#{password}
+        ,#{birthDate}
+        ,#{sexId}
+        ,#{birthPlaceId}
+        ,#{nickName}
+        ,#{assigneeId}
+        ,#{photo}
         <if test="updateAt != null">
             ,#{updateAt}
         </if>
@@ -101,5 +104,11 @@
         </if>
         )
     </insert>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM t_employee
+        WHERE
+            emp_No = #{empNo}
+    </delete>
 
 </mapper>
