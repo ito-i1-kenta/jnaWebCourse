@@ -26,7 +26,11 @@ Webアプリ研修。
 
 - [アプトプット（制作物）](#アプトプット)
 
+- [結合試験項目書の例](#結合試験項目書の例)
+
 **[設計](#設計)**
+
+- [画面設計](#画面設計)
 
 - [画面シーケンス図](#画面シーケンス図)
 
@@ -122,7 +126,7 @@ Service
     ビジネスロジック本体。
 
 ***
-Infrastructure層
+**Infrastructure層**
 ***
 
 Entity
@@ -133,7 +137,57 @@ Entity
 mapper
 
     DBアクセスするクラス。
-   
+
+***
+**フォルダ構成**
+***
+
+    src
+    ├─main ⇒アプリケーションの実体
+    │  ├─java ⇒Javaのソースコード
+    │  │  └─jna
+    │  │      └─example
+    │  │          └─training
+    │  │              │  
+    │  │              ├─application ⇒Application層
+    │  │              │  ├─controller
+    │  │              │  └─resource
+    │  │              │          
+    │  │              ├─domain ⇒Domain層
+    │  │              │  ├─object
+    │  │              │  └─service
+    │  │              │          
+    │  │              └─infrastructure ⇒Infrastructure層
+    │  │                  ├─entity
+    │  │                  └─mapper
+    │  │                          
+    │  └─resources ⇒Javaのソースコード以外の資源
+    │      │  application.properties
+    │      │  application.yml ⇒アプリケーションの設定ファイル
+    │      │  messages.properties ⇒日本語メッセージのプロパティファイル
+    │      │  
+    │      ├─jna
+    │      │  └─example
+    │      │      └─training
+    │      │          └─infrastructure
+    │      │              └─mapper ⇒Infrastructure層のmapperクラスから呼び出すSQL構文
+    │      │                      
+    │      ├─static
+    │      │  ├─css ⇒Webページのスタイル指定
+    │      │  ├─images ⇒静的画像
+    │      │  └─js ⇒Webページの自作Javascript
+    │      │          
+    │      └─templates ⇒Webページ
+    │          └─common ⇒Webページの共通部品
+    │                  
+    └─test ⇒単体テスト
+        └─java
+            └─jna
+                └─example
+                    └─training
+                        └─application
+                            └─controller
+
 # 導入手順・機能要件・アプトプット（制作物） 
 ## 導入手順
 
@@ -227,6 +281,11 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
 - エビデンス
 
 	⇒試験項目書の実施結果をエビデンス（証跡）として作成すること。
+
+### 結合試験項目書の例
+社員情報登録画面
+https://drive.google.com/drive/u/1/folders/1sKlEGVFEqyM7HG4u3G7dRQ9_E5ao7hIw
+
 
 # 設計
 
@@ -568,7 +627,9 @@ ___
 
 以下の画面を開いた時、画面名称がわからない。
 
-そのため、各画面のhtmlファイルに画面名称が表示されるようにしなさい。
+そのため、各画面のhtmlファイルに手を加え、画面内に画面名称を表示するようにしなさい。
+
+htmlファイルは、「jnaWebCourse\src\main\resources\templates」フォルダ内に存在する。
 
 【作成物】
 
@@ -636,6 +697,7 @@ DBのテーブルから削除する処理を実装しなさい。
 
     - 実装
     - 可能なら単体試験（実装箇所のJUnitを作成）
+    　 「jnaWebCourse\src\test\java\jna\example\training」内に作成。
         
 3. 結合試験
     　　
@@ -658,6 +720,7 @@ DBのテーブルから削除する処理を実装しなさい。
 
     - 実装
     - 可能なら単体試験（実装箇所のJUnitを作成）
+    　 「jnaWebCourse\src\test\java\jna\example\training」内に作成。
         
 3. 結合試験
     　　
@@ -679,6 +742,7 @@ DBのテーブルから削除する処理を実装しなさい。
 
     - 実装
     - 可能なら単体試験（実装箇所のJUnitを作成）
+    　 「jnaWebCourse\src\test\java\jna\example\training」内に作成。
         
 3. 結合試験
     　　
