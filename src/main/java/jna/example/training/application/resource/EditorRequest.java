@@ -33,6 +33,12 @@ public class EditorRequest {
     @NotNull
     public String assignee;
 
+    @NotNull
+    public String unitPrice;
+
+    @NotNull
+    public String position;
+
     public String photo;
 
     public void factory(EditorResponseResource responseResource) {
@@ -43,6 +49,8 @@ public class EditorRequest {
         this.birthPlace = String.valueOf(responseResource.getBirthPlaceId().getBirthPlace());
         this.nickName = Optional.ofNullable(responseResource.getNickName()).map(val -> val.getNickName()).orElse(null);
         this.assignee = String.valueOf(responseResource.getAssigneeId().getAssignee());
+        this.unitPrice = String.valueOf(responseResource.getUnitPrice().getUnitPrice());
+        this.position =String.valueOf(responseResource.getPositionId().getPositionId());
         this.photo = Optional.ofNullable(responseResource.getPhoto()).map(val -> val.getPhoto()).orElse(null);
     }
 

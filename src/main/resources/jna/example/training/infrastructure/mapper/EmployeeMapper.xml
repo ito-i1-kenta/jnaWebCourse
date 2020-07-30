@@ -16,7 +16,10 @@
             m_pre.place_name,
             t_emp.nick_name,
             t_emp.assignee_id,
-            null,
+            m_ass.assignee_name,
+            t_emp.unit_price,
+            t_emp.position_id,
+            m_pos.position_name,
             t_emp.photo,
             t_emp.update_at,
             t_emp.create_at
@@ -24,46 +27,67 @@
             t_employee AS t_emp
             ,m_sex AS m_sex
             ,m_prefectures AS m_pre
+            ,m_assignees AS m_ass
+            ,m_position AS m_pos
         where
             t_emp.sex_id = m_sex.sex_id
             AND t_emp.birth_place_id = m_pre.place_id
+            AND t_emp.assignee_id = m_ass.assignee_id
+            AND t_emp.position_id = m_pos.position_id
             <if test="empNo != ''">
                 AND t_emp.emp_no like '%${empNo}%'
             </if>
             <if test="userName != ''">
                 AND t_emp.user_name like '%${userName}%'
             </if>
+        order by t_emp.birth_date desc
     </select>
 
-    <select id="searchById" resultType="jna.example.training.infrastructure.entity.EmployeeEntity">
+    <select id="searchByEmpNo" resultType="jna.example.training.infrastructure.entity.EmployeeEntity">
         SELECT
-        t_emp.emp_no,
-        t_emp.user_name,
-        t_emp.password,
-        t_emp.birth_date,
-        t_emp.sex_id,
-        m_sex.sex_name,
-        t_emp.birth_place_id,
-        m_pre.place_name,
-        t_emp.nick_name,
-        t_emp.assignee_id,
-        null,
-        t_emp.photo,
-        t_emp.update_at,
-        t_emp.create_at
+            t_emp.emp_no,
+            t_emp.user_name,
+            t_emp.password,
+            t_emp.birth_date,
+            t_emp.sex_id,
+            m_sex.sex_name,
+            t_emp.birth_place_id,
+            m_pre.place_name,
+            t_emp.nick_name,
+            t_emp.assignee_id,
+            m_ass.assignee_name,
+            t_emp.unit_price,
+            t_emp.position_id,
+            m_pos.position_name,
+            t_emp.photo,
+            t_emp.update_at,
+            t_emp.create_at
         FROM
-        t_employee AS t_emp
-        ,m_sex AS m_sex
-        ,m_prefectures AS m_pre
+            t_employee AS t_emp
+            ,m_sex AS m_sex
+            ,m_prefectures AS m_pre
+            ,m_assignees AS m_ass
+            ,m_position AS m_pos
         where
-        t_emp.sex_id = m_sex.sex_id
-        AND t_emp.birth_place_id = m_pre.place_id
+            t_emp.sex_id = m_sex.sex_id
+            AND t_emp.birth_place_id = m_pre.place_id
+            AND t_emp.assignee_id = m_ass.assignee_id
+            AND t_emp.position_id = m_pos.position_id
         <if test="empNo != ''">
             AND t_emp.emp_no like '%${empNo}%'
         </if>
+        order by t_emp.birth_date desc
     </select>
 
-    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+    <delete id="delete">
+        DELETE
+        FROM
+        t_employee
+        WHERE
+        emp_no = #{empNo}
+    </delete>
+
+    <insert id="save">
         INSERT INTO t_employee
         (
             emp_no
@@ -74,6 +98,8 @@
             ,birth_place_id
             ,nick_name
             ,assignee_id
+            ,unit_price
+            ,position_id
             ,photo
         <if test="updateAt != null">
             ,update_at
@@ -84,7 +110,7 @@
         )
         VALUES
         (
-            #{empNo}
+             #{empNo}
             ,#{userName}
             ,#{password}
             ,#{birthDate}
@@ -92,6 +118,8 @@
             ,#{birthPlaceId}
             ,#{nickName}
             ,#{assigneeId}
+            ,#{unitPrice}
+            ,#{positionId}
             ,#{photo}
         <if test="updateAt != null">
             ,#{updateAt}
@@ -101,5 +129,25 @@
         </if>
         )
     </insert>
+
+    <update id="edit">
+        UPDATE t_employee
+        SET
+            USER_NAME = #{userName},
+            PASSWORD = #{password},
+            BIRTH_DATE = #{birthDate},
+            SEX_ID = #{sexId},
+            BIRTH_PLACE_ID = #{birthPlaceId},
+            NICK_NAME = #{nickName},
+            ASSIGNEE_ID = #{assigneeId},
+            UNIT_PRICE = #{unitPrice},
+            POSITION_ID = #{positionId},
+            PHOTO = #{photo}
+            <if test="updateAt != null">
+                ,UPDATE_AT = #{updateAt}
+            </if>
+        WHERE
+            EMP_NO = #{empNo}
+    </update>
 
 </mapper>

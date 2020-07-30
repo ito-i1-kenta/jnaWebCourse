@@ -6,8 +6,32 @@ Actor "操作者" as User
 User -> 社員情報一覧画面
 
 activate 社員情報一覧画面
-社員情報一覧画面 -> DeleteController
+社員情報一覧画面 -> DeleteController:GET /delete/{empNo}
 deactivate 社員情報一覧画面
+
+activate DeleteController
+DeleteController -> DeleteService
+deactivate DeleteController
+
+activate DeleteService
+DeleteService -> 各種mapper
+deactivate DeleteService
+
+activate 各種mapper
+各種mapper -> DB
+deactivate 各種mapper
+
+activate DB
+各種mapper <- DB
+deactivate DB
+
+activate 各種mapper
+DeleteService <- 各種mapper
+deactivate 各種mapper
+
+activate DeleteService
+DeleteController <- DeleteService
+deactivate DeleteService
 
 activate DeleteController
 社員情報一覧画面 <- DeleteController

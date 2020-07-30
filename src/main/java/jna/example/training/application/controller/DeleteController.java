@@ -1,5 +1,6 @@
 package jna.example.training.application.controller;
 
+import jna.example.training.domain.service.DeleteService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.util.Locale;
 public class DeleteController {
 
     protected final MessageSource messageSource;
+    protected final DeleteService deleteService;
 
     /*
         社員情報削除API
@@ -25,7 +27,7 @@ public class DeleteController {
                          RedirectAttributes attributes) {
 
         // Todo 削除処理
-
+        deleteService.delete(empNo);
 
         // 画面に表示する属性設定
         attributes.addFlashAttribute("complete", messageSource.getMessage("delete.complete", null, Locale.JAPAN));

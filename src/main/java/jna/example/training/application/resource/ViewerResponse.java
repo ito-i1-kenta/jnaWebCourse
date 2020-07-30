@@ -25,6 +25,8 @@ public class ViewerResponse {
                 resource.getBirthPlaceName().getBirthPlaceName(),
                 Optional.ofNullable(resource.getNickName()).map(val -> val.getNickName()).orElse(null),
                 Optional.ofNullable(resource.getAssigneeName()).map(val -> val.getAssigneeName()).orElse(null),
+                resource.getUnitPrice().getUnitPrice(),
+                resource.getPositionName().getPositionName(),
                 Optional.ofNullable(resource.getPhoto()).map(val -> val.getPhoto()).orElse(null)
         );
     }
@@ -39,6 +41,8 @@ public class ViewerResponse {
         private String birthPlaceName;
         private String nickName;
         private String assigneeName;
+        private String unitPrice;
+        private String positionName;
         private String photo;
     }
 

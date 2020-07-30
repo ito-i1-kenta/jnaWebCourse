@@ -21,6 +21,8 @@
 
     <link th:href="@{/css/viewer.css}" rel="stylesheet">
 
+    <link th:href="@{/css/tableScroll.css}" rel="stylesheet">
+
 
 </head>
 
@@ -29,6 +31,11 @@
 <div th:replace="common/menu :: menu_fragment"></div>
 
 <div class="ui container" th:object="${viewerSearchRequest}">
+    <div class="ui vertical segment">
+        <h1 class="ui top header">一覧
+            <div class="sub header">社員情報を表示します</div>
+        </h1>
+    </div>
 
     <div class="ui error message" th:if="${#fields.hasErrors('*')}">
         <div class="header">
@@ -43,7 +50,7 @@
         <div class="header">
             成功
         </div>
-        <p th:text="#{delete.complete}"></p>
+        <p th:text="#{delete.complete}">成功</p>
     </div>
 
     <form class="ui form" method="get" th:action="@{/viewer/search}">
@@ -83,51 +90,56 @@
                 <h4 class="ui dividing header">
                     検索結果（[[${#lists.size(viewerResponse.responseList)}]]件）
                 </h4>
-
-                <table class="ui sortable teal celled table">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th class="profile">プロフィール</th>
-                        <th>社員番号</th>
-                        <th>氏名</th>
-                        <th>生年月日</th>
-                        <th>性別</th>
-                        <th>出身地</th>
-                        <th>ニックネーム</th>
-                        <th>配属先</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="response, responseStat : ${viewerResponse.responseList}">
-                        <td th:text="${responseStat.count}"></td>
-                        <td><img class="ui Tiny circular image profile__image"
-                                 th:src="${response.getPhoto() != null} ? ${response.getPhoto()} : '/images/square-image.png'">
-                        </td>
-                        <td th:text="${response.getEmpNo()}"></td>
-                        <td th:text="${response.getUserName()}"></td>
-                        <td th:text="${response.getBirthDate() != null} ? ${response.getBirthDate()} : '-'"></td>
-                        <td th:text="${response.getSexName()}"></td>
-                        <td th:text="${response.getBirthPlaceName()}"></td>
-                        <td th:text="${response.getNickName() != null} ? ${response.getNickName()} : '-'"></td>
-                        <td th:text="${response.getAssigneeName()}"></td>
-                        <td>
-                            <div class="ui buttons">
-                                <button type="button" class="ui orange button"
-                                        th:attr="onclick='window.location.href=\'/editor/' + ${response.getEmpNo()} + '\''">
-                                    編集
-                                </button>
-                                <div class="or"></div>
-                                <button type="button" class="ui red button" name="deleteModal"
-                                        th:data-id="${response.getEmpNo()}"
-                                        th:data-userName="${response.getUserName()}">削除
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="scroll-table">
+                    <table class="ui sortable teal celled unstackable table">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th class="profile">プロフィール</th>
+                            <th>社員番号</th>
+                            <th>氏名</th>
+                            <th>生年月日</th>
+                            <th>性別</th>
+                            <th>出身地</th>
+                            <th>ニックネーム</th>
+                            <th>配属先</th>
+                            <th>単価</th>
+                            <th>役職</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="response, responseStat : ${viewerResponse.responseList}">
+                            <td th:text="${responseStat.count}"></td>
+                            <td><img class="ui Tiny circular image profile__image"
+                                     th:src="${response.getPhoto() != null} ? ${response.getPhoto()} : '/images/square-image.png'">
+                            </td>
+                            <td th:text="${response.getEmpNo()}"></td>
+                            <td th:text="${response.getUserName()}"></td>
+                            <td th:text="${response.getBirthDate() != null} ? ${response.getBirthDate()} : '-'"></td>
+                            <td th:text="${response.getSexName()}"></td>
+                            <td th:text="${response.getBirthPlaceName()}"></td>
+                            <td th:text="${response.getNickName() != null} ? ${response.getNickName()} : '-'"></td>
+                            <td th:text="${response.getAssigneeName()}"></td>
+                            <td th:text="${response.getUnitPrice()}"></td>
+                            <td th:text="${response.getPositionName()}"></td>
+                            <td>
+                                <div class="ui buttons">
+                                    <button type="button" class="ui orange button"
+                                            th:attr="onclick='window.location.href=\'/editor/' + ${response.getEmpNo()} + '\''">
+                                        編集
+                                    </button>
+                                    <div class="or"></div>
+                                    <button type="button" class="ui red button" name="deleteModal"
+                                            th:data-id="${response.getEmpNo()}"
+                                            th:data-userName="${response.getUserName()}">削除
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 

@@ -37,10 +37,11 @@ public class ViewerController {
         ViewerResource resource = new ViewerResource();
         resource.setViewerSearchConditionResource(
                 ViewerSearchConditionResource.create(
-                        Optional.ofNullable(viewerSearchRequest.empNo).map(EmpNo::of).orElse(null),
-                        Optional.ofNullable(viewerSearchRequest.userName).map(UserName::of).orElse(null)
+                        Optional.ofNullable(viewerSearchRequest.getEmpNo()).map(EmpNo::of).orElse(null),
+                        Optional.ofNullable(viewerSearchRequest.getUserName()).map(UserName::of).orElse(null)
                 ));
 
+        // 検索処理
         // 検索処理
         List<ViewerResponseResource> list = viewerService.search(resource);
 

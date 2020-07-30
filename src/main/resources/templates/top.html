@@ -20,38 +20,44 @@
 <!-- th:replaceを使用して、 メニュー用のフラグメントを読込みます -->
 <div th:replace="common/menu :: menu_fragment"></div>
 
-<div class="ui container">
-    <div class="ui piled segment">
-        <h2 class="ui header">[[${msg}]]</h2>
-        <p>Webアプリ研修。</p>
-        <p></p>
 
-        <h4>## 課題実施目的</h4>
-        <p>- MVCモデルを理解する。</p>
-        <p>- DB ⇒ API ⇒ 画面 の流れを理解する。</p>
-        <p></p>
-
-        <h4>## ミドルウェア</h4>
-        <p>- Webサーバ：Apache</p>
-        <p>- 開発言語：Java</p>
-        <p>- データベース：MySQL</p>
-        <p>- O/Rマッパー：MyBatis</p>
-        <p>- フレームワーク：Spring Boot</p>
-        <p>- テンプレートエンジン：Thymeleaf</p>
-        <p>- CSSフレームワーク：Semantic UI</p>
-        <p></p>
-
-        <h4>## 機能要件</h4>
-        <p>社員情報管理システム</p>
-        <p></p>
-
-        <h4>[画面構成]</h4>
-        <p>0.TOP</p>
-        <p>1.社員情報登録</p>
-        <p>2.社員情報一覧（検索・削除）</p>
-        <p>3.社員情報編集</p>
-        <p></p>
-
+<div class="ui fluid container">
+    <div class="ui vertical masthead center aligned segment">
+        <div class="column">
+            <div class="ui text container">
+                <h1 class="ui header">[[${msg}]]</h1>
+            </div>
+        </div>
+    </div>
+    <div class="ui segments">
+        <div class="ui red center aligned segment">
+            <a href="/viewer">
+                <h2 class="ui top header">表示
+                    <div class="sub header">社員情報テーブルを表示します</div>
+                </h2>
+            </a>
+        </div>
+        <div class="ui orange center aligned segment">
+            <a href="/register">
+                <h2 class="ui header">登録
+                    <div class="sub header">社員情報テーブルに登録します</div>
+                </h2>
+            </a>
+        </div>
+        <div class="ui yellow center aligned segment">
+            <a href="/assigneeViewer">
+                <h2 class="ui top header">配属先編集
+                    <div class="sub header">配属先テーブルを表示します</div>
+                </h2>
+            </a>
+        </div>
+        <div class="ui olive center aligned segment">
+            <a href="/salaryViewer">
+                <h2 class="ui header">給与表示
+                    <div class="sub header">給与情報を表示します</div>
+                </h2>
+            </a>
+        </div>
     </div>
 </div>
 

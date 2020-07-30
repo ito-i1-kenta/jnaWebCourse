@@ -20,6 +20,9 @@ public class EmployeeEntity extends CommonEntity {
     private String birthPlaceName;
     private String nickName;
     private int assigneeId;
+    private String unitPrice;
+    private int positionId;
+    private String positionName;
     private String assigneeName;
     private byte[] photo;
 }

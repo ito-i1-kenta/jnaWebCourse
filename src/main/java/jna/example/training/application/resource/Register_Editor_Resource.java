@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Data
 @AllArgsConstructor(staticName = "create")
-public class RegisterResource {
+public class Register_Editor_Resource {
     private EmpNo empNo;
     private UserName userName;
     private Password password;
@@ -18,7 +18,10 @@ public class RegisterResource {
     private BirthPlaceId birthPlaceId;
     private NickName nickName;
     private AssigneeId assigneeId;
+    private UnitPrice unitPrice;
+    private PositionId positionId;
     private Photo photo;
+
 
     public EmployeeEntity toEntity() {
         return EmployeeEntity.builder()
@@ -32,6 +35,8 @@ public class RegisterResource {
                 .nickName(Optional.ofNullable(nickName)
                         .map(NickName::getNickName).orElse(null))
                 .assigneeId(assigneeId.getAssignee())
+                .unitPrice(unitPrice.getUnitPrice())
+                .positionId(positionId.getPositionId())
                 .photo(Optional.ofNullable(photo)
                         .map(val -> val.getPhoto().getBytes()).orElse(null))
                 .build();
