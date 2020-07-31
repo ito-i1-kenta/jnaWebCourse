@@ -1,10 +1,13 @@
 package jna.example.training.application.controller;
 
 import jna.example.training.application.resource.EditorRequest;
+import jna.example.training.application.resource.EditorResource;
 import jna.example.training.application.resource.EditorResponseResource;
-import jna.example.training.domain.object.EmpNo;
+import jna.example.training.domain.object.*;
+import jna.example.training.domain.service.EditorService;
 import jna.example.training.domain.service.RegisterService;
 import jna.example.training.domain.service.ViewerService;
+import jna.example.training.infrastructure.entity.AssigneeEntity;
 import jna.example.training.infrastructure.entity.PrefecturesEntity;
 import jna.example.training.infrastructure.entity.SexEntity;
 import lombok.AllArgsConstructor;
@@ -30,6 +33,7 @@ public class EditorController {
     protected final MessageSource messageSource;
     private final RegisterService registerService;
     private final ViewerService viewerService;
+    private final EditorService editorService;
 
     /*
         画面から受け取る値が未入力、未設定ならnullを設定するためのメソッド
@@ -53,6 +57,10 @@ public class EditorController {
         // レスポンス値の設定
         editorRequest.factory(resource);
 
+        // 画面に表示する属性設定
+        model.addAttribute("name",
+                "編集");
+
         // editor.htmlの呼び出し
         return "editor";
     }
@@ -69,11 +77,24 @@ public class EditorController {
             return "editor";
         }
 
-        // TODO:更新処理
+        EditorResource resource = EditorResource.edit(
+                EmpNo.of(editorRequest.empNo),
+                UserName.of(editorRequest.userName),
+                Password.of(editorRequest.password),
+                BirthDate.of(editorRequest.birthDate),
+                SexId.of(editorRequest.sex),
+                BirthPlaceId.of(editorRequest.birthPlace),
+                NickName.of(editorRequest.nickName),
+                AssigneeId.of(editorRequest.assignee),
+                Photo.of(editorRequest.photo)
+        );
 
+        // 更新処理
+        editorService.editor(resource);
 
         // 画面に表示する属性設定
-        model.addAttribute("complete", messageSource.getMessage("editor.complete", null, Locale.JAPAN));
+        model.addAttribute("name", "編集");
+        model.addAttribute("complete", messageSource.getMessage("update.complete", null, Locale.JAPAN));
 
         return "editor";
     }
@@ -98,17 +119,9 @@ public class EditorController {
         配属先リスト
      */
     @ModelAttribute("assigneeList")
-    public HashMap<String, String> assigneeList() {
-        return new LinkedHashMap<String, String>() {{
-            put("1", "神奈川営業所");
-            put("2", "新宿営業所");
-            put("3", "大阪営業所");
-            put("4", "福岡営業所");
-            put("5", "仙台営業所");
-            put("6", "宇都宮営業所");
-            put("7", "大宮営業所");
-            put("8", "名古屋営業所");
-        }};
+    public List<AssigneeEntity> assigneeList() {
+        return registerService.getAssigneeList();
     }
+
 
 }

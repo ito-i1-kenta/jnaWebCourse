@@ -37,7 +37,7 @@ public class ViewerService {
 
         EmployeeEntity result = employeeMapper.searchById(empNo.getEmpNo());
 
-        ViewerResponseResource resource = searchFactory(result);
+      //ViewerResponseResource resource = searchFactory(result);
         return EditorResponseResource.builder()
                 .empNo(EmpNo.of(result.getEmpNo()))
                 .userName(UserName.of(result.getUserName()))

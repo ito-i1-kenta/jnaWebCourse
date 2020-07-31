@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>編集</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <!-- semantic.css  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css" rel="stylesheet"
+          type="text/css">
+
+    <!-- semantic.js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
+    <script th:src="@{/js/register.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+
+</head>
+<body>
+<!-- th:replaceを使用して、 メニュー用のフラグメントを読込みます -->
+<div th:replace="common/menu :: menu_fragment"></div>
+
+<div class="ui container" th:object="${masterEditorRequest}">
+
+    <div class="ui yellow inverted circular segment">
+        <h1 class="ui green header">
+             <span style="background-color:#000000;padding : 0.1em">
+                 [[${name}]]
+             </span>
+        </h1>
+        <p style="color:#ff0000">拠点かいぞ～</p>
+    </div>
+
+    <div class="ui error message" th:if="${#fields.hasErrors('*')}">
+        <div class="header">
+            エラー
+        </div>
+        <ul class="list">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+        </ul>
+    </div>
+    <div class="ui success message" th:if="${complete}">
+        <div class="header">
+            成功
+        </div>
+        <p th:text="#{masterUpdate.complete}"></p>
+    </div>
+
+    <form class="ui form" enctype="multipart/>form-data" method="post" th:action="@{/masterEditor}">
+        <div class="ui grid">
+            <div class="twelve wide column">
+                <div class="row">
+
+                    <div class="required field" >
+                        <label>拠点番号(書き換え不可)</label>
+                        <input type="text" th:field="*{assigneeId}" placeholder="*{assigneeId}" readonly="">
+                    </div>
+
+                    <div class="required field">
+                        <label>拠点改修</label>
+                        <input type="text" th:field="*{assigneeName}" placeholder="拠点名を入力してください">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui sixteen wide column">
+                <div class="row">
+                    <div class="ui fluid divider"></div>
+                </div>
+                <div class="row">
+                    <button class="ui green button">更新</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

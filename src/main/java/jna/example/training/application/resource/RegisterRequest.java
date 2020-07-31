@@ -1,6 +1,7 @@
 package jna.example.training.application.resource;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -19,6 +20,7 @@ public class RegisterRequest {
     public String password;
 
     // 日付（YYYY-MM-DD）のバリデーション
+    @DateTimeFormat
     public String birthDate;
 
     @NotNull

@@ -25,6 +25,12 @@ public class ViewerController {
     @GetMapping("/viewer")
     public String init(@ModelAttribute ViewerSearchRequest viewerSearchRequest, Model model) {
         // viewer.htmlの呼び出し
+
+        // 画面に表示する属性設定
+        model.addAttribute("name",
+                "社員情報一覧");
+
+
         return "viewer";
     }
 
@@ -32,7 +38,7 @@ public class ViewerController {
         社員情報一覧検索API
      */
     @GetMapping("/viewer/search")
-    public String search(@ModelAttribute ViewerSearchRequest viewerSearchRequest, @ModelAttribute ViewerResponse ViewerResponse, Model model) {
+    public String search(@ModelAttribute ViewerSearchRequest viewerSearchRequest, @ModelAttribute ViewerResponse viewerResponse, Model model) {
 
         ViewerResource resource = new ViewerResource();
         resource.setViewerSearchConditionResource(
@@ -46,7 +52,14 @@ public class ViewerController {
 
         // レスポンス値の設定
         resource.setViewerResponseResource(list);
-        ViewerResponse.factory(resource.getViewerResponseResource());
+        viewerResponse.factory(resource.getViewerResponseResource());
+
+
+
+        // 画面に表示する属性設定
+        model.addAttribute("name",
+                "社員情報一覧");
+
 
         return "viewer";
     }

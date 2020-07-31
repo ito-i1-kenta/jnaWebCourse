@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>拠点新築</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <!-- semantic.css  -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+
+    <!-- semantic.js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
+
+    <!-- tablesort.js -->
+    <script src="https://semantic-ui.com/javascript/library/tablesort.js"></script>
+
+    <script th:src="@{/js/masterRegister.js}"></script>
+
+    <link th:href="@{/css/masterRegister.css}" rel="stylesheet">
+
+</head>
+<body>
+<!-- th:replaceを使用して、メニュー用のフラグメントを読み込みます -->
+<div th:replace="common/menu :: menu_fragment"></div>
+
+<div class="ui container">
+    <div class="ui blue inverted circular segment">
+        <h1 class="ui red header">
+            [[${name}]]
+        </h1>
+        <p>拠点新築</p>
+        <p>するんじゃ～</p>
+        <p></p>
+    </div>
+    <p></p>
+</div>
+
+<div class="ui container" th:object="${masterRegisterRequest}">
+    <h1 class="ui red header">新築</h1>
+
+    <div class="ui error message" th:if="${#fields.hasErrors('*')}">
+        <div class="header">
+            エラー
+        </div>
+        <ul class="list">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+        </ul>
+    </div>
+
+    <div class="ui success message" th:if="${complete}">
+        <div class="header">
+            成功
+        </div>
+        <p th:text="#{masterRegister.complete}"></p>
+    </div>
+
+    <form class="ui form" enctype="multipart/form-data" method="post" th:action="@{/masterRegister}">
+
+        <div class="ui grid">
+            <div class="twelve wide column">
+                <div class="row">
+                    <div class="required field">
+                        <label>新規拠点建築</label>
+                        <input type="text" th:field="*{assigneeName}" placeholder="拠点名を入力してください">
+                    </div>
+                </div>
+            </div>
+            <div class="ui sixteen wide column">
+                <div class="row">
+                    <button class="ui green button">建築</button>
+                </div>
+                <div class="row">
+                    <div class="ui fluid divider"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="ui success message" th:if="${deleteComplete}">
+        <div class="header">
+            成功
+        </div>
+        <p th:text="#{masterDelete.complete}"></p>
+    </div>
+
+    <h1 class="ui red header">一覧・改築</h1>
+    <form class="ui form" enctype="multipart/form-data" method="get" th:action="@{/masterRegister}">
+
+        <div class="ui grid">
+           <div class="sixteen wide column" th:if="${masterViewerResponse !=null}">
+               <h4 class="ui dividing header">
+                   拠点数([[${#lists.size(masterViewerResponse.responseList)}]]件)
+               </h4>
+
+               <table id="assigneeTable" class="ui sortable teal celled table">
+                   <thead>
+                   <tr>
+                       <th>No</th>
+                       <th>拠点名</th>
+                       <th></th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr th:each="response, responseStat : ${masterViewerResponse.responseList}">
+                       <td th:text="${responseStat.count}"></td>
+                       <td th:text="${response.getAssigneeName()}"></td>
+                       <td>
+                           <div class="ui buttons">
+                               <button type="button" class="ui orange button"
+                                       th:attr="onclick='window.location.href=\'/masterEditor/' + ${response.getAssigneeId()} + '\''">
+                                   改築
+                               </button>
+                               <div class="or"></div>
+                               <button type="button" class="ui red button" name="masterDeleteModal"
+                                       th:data-id="${response.getAssigneeId()}"
+                                       th:data-assigneeName="${response.getAssigneeName()}">
+                                   削除
+                               </button>
+                           </div>
+                       </td>
+                   </tr>
+                   </tbody>
+               </table>
+           </div>
+
+        </div>
+    </form>
+
+    <!--action属性はjsファイルで動的に変更-->
+    <form name="masterFormModal" method="GET">
+        <div class="ui basic modal">
+            <div class="ui icon header">
+                <i class="trash alternate icon"></i>
+                拠点解体しますか？
+            </div>
+            <div class="content">
+                <p class="masterModal__p" id="delAssigneeId"/>
+                <p class="masterModal__p" id="delAssigneeName"/>
+            </div>
+            <div class="actions">
+                <div class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    キャンセル
+                </div>
+                <a href="javascript:masterFormModal.submit()">
+                    <div class="ui green ok inverted button">
+                        <i class="checkmark icon"></i>
+                        解体
+                    </div>
+                </a>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

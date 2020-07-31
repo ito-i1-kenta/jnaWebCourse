@@ -14,4 +14,8 @@ public interface EmployeeMapper {
 
     void save(EmployeeEntity entity);
 
+    void delete(String empNo);
+
+    void update(EmployeeEntity entity);
+
 }

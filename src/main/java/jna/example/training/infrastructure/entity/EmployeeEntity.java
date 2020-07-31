@@ -13,7 +13,7 @@ public class EmployeeEntity extends CommonEntity {
     private String empNo;
     private String userName;
     private String password;
-    private LocalDate birthDate;
+    private String birthDate;
     private int sexId;
     private String sexName;
     private int birthPlaceId;

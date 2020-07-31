@@ -16,6 +16,9 @@ public class TopController {
         model.addAttribute("msg",
                 "JNA Webアプリ 講座！");
 
+        model.addAttribute("name",
+                "TOP");
+
         // top.htmlの呼び出し
         return "top";
     }

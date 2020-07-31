@@ -26,11 +26,7 @@ Webアプリ研修。
 
 - [アプトプット（制作物）](#アプトプット)
 
-- [結合試験項目書の例](#結合試験項目書の例)
-
 **[設計](#設計)**
-
-- [画面設計](#画面設計)
 
 - [画面シーケンス図](#画面シーケンス図)
 
@@ -126,7 +122,7 @@ Service
     ビジネスロジック本体。
 
 ***
-**Infrastructure層**
+Infrastructure層
 ***
 
 Entity
@@ -137,57 +133,7 @@ Entity
 mapper
 
     DBアクセスするクラス。
-
-***
-**フォルダ構成**
-***
-
-    src
-    ├─main ⇒アプリケーションの実体
-    │  ├─java ⇒Javaのソースコード
-    │  │  └─jna
-    │  │      └─example
-    │  │          └─training
-    │  │              │  
-    │  │              ├─application ⇒Application層
-    │  │              │  ├─controller
-    │  │              │  └─resource
-    │  │              │          
-    │  │              ├─domain ⇒Domain層
-    │  │              │  ├─object
-    │  │              │  └─service
-    │  │              │          
-    │  │              └─infrastructure ⇒Infrastructure層
-    │  │                  ├─entity
-    │  │                  └─mapper
-    │  │                          
-    │  └─resources ⇒Javaのソースコード以外の資源
-    │      │  application.properties
-    │      │  application.yml ⇒アプリケーションの設定ファイル
-    │      │  messages.properties ⇒日本語メッセージのプロパティファイル
-    │      │  
-    │      ├─jna
-    │      │  └─example
-    │      │      └─training
-    │      │          └─infrastructure
-    │      │              └─mapper ⇒Infrastructure層のmapperクラスから呼び出すSQL構文
-    │      │                      
-    │      ├─static
-    │      │  ├─css ⇒Webページのスタイル指定
-    │      │  ├─images ⇒静的画像
-    │      │  └─js ⇒Webページの自作Javascript
-    │      │          
-    │      └─templates ⇒Webページ
-    │          └─common ⇒Webページの共通部品
-    │                  
-    └─test ⇒単体テスト
-        └─java
-            └─jna
-                └─example
-                    └─training
-                        └─application
-                            └─controller
-
+   
 # 導入手順・機能要件・アプトプット（制作物） 
 ## 導入手順
 
@@ -281,11 +227,6 @@ https://drive.google.com/drive/u/0/folders/1RR6sXYYIMw5MYcDzz_taycg_iyOsgUzQ
 - エビデンス
 
 	⇒試験項目書の実施結果をエビデンス（証跡）として作成すること。
-
-### 結合試験項目書の例
-社員情報登録画面
-https://drive.google.com/drive/u/1/folders/1sKlEGVFEqyM7HG4u3G7dRQ9_E5ao7hIw
-
 
 # 設計
 
@@ -385,14 +326,13 @@ ___
 
 【社員情報一覧画面（削除）】
 
-![社員情報一覧画面（削除）](https://user-images.githubusercontent.com/64938514/83995132-897a4600-a993-11ea-96cb-f4f698d8fbc4.png)
+![社員情報一覧画面（削除）](./docs/sequence/社員情報一覧画面（削除）.png)
 
 ___
 
 【社員情報編集画面】
 
-![社員情報編集画面](https://user-images.githubusercontent.com/64938514/83995152-97c86200-a993-11ea-9259-82842117cf2e.png)
-
+![社員情報編集画面](./)
 ## API一覧
 
 現場では画面シーケンス図は作成せず、API仕様を作成する場合が多いです。
@@ -429,7 +369,7 @@ API設計では「[API一覧](#API一覧)」、「[API仕様](#API仕様)」を�
   
   |項目名|パラメータ名|入力規則|備考|
   | ---- | ---- | ---- | ---- |
-  | 社員番号 | empNO | 6桁整数 | 必須 |
+  | 社員番号 | empNo | 6桁整数 | 必須 |
   | 氏名 | userName || 必須 |
   | パスワード | password || 必須 |
   | 生年月日 | birthDate |||
@@ -458,7 +398,7 @@ ___
 
 |項目名|パラメータ名|入力規則|備考|
 | ---- | ---- | ---- | ---- |
-| 社員番号 | empNO |||
+| 社員番号 | empNo |||
 | 氏名 | userName |||
 
 #### レスポンス
@@ -471,7 +411,7 @@ ___
 
 |項目名|パラメータ名|備考|
 | ---- | ---- | ---- |
-| 社員番号 | empNO ||
+| 社員番号 | empNo ||
 | 氏名 | userName ||
 | パスワード | password ||
 | 生年月日 | birthDate ||
@@ -480,6 +420,28 @@ ___
 | ニックネーム | nickName ||
 | 配属先 | assignee ||
 | プロフィール画像 | photo ||
+
+### 【社員情報削除API】
+___
+
+#### 概要
+
+社員情報を削除する。
+
+#### シーケンス図
+
+![社員情報削除API](./docs/sequence/api/deleteAPI.png)
+
+#### リクエスト
+
+|項目名|パラメータ名|入力規則|備考|
+| ---- | ---- | ---- | ---- |
+| 社員番号 | empNo |||
+| 氏名 | userName |||
+
+#### レスポンス
+
+なし
 
 ## DB定義書
 
@@ -513,6 +475,12 @@ ___
 |〇|PLACE_ID|ID|TINYINT|||
 | |PLACE_NAME|名称|VARCHAR(255)|255|〇|
 
+◆m_ASSIGNEE（配属先マスター）テーブル
+
+|PK|物理名|論理名|データ型|長さ(バイト)|NOT NULL|備考|
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+|〇|ASSIGNEE_ID|ID|TINYINT|||
+| |ASSIGNEE_NAME|名称|VARCHAR(255)|255|〇|
 
 ### DB初期構築
 ***
@@ -547,6 +515,14 @@ ___
         PLACE_ID TINYINT PRIMARY KEY,
         PLACE_NAME VARCHAR(255) NOT NULL
     );
+    
+    
+    -- 配属先マスターテーブル作成
+    CREATE TABLE JNA.m_ASSIGNEE (
+        ASSIGNEE_ID AUTO_INCREMENT TINYINT PRIMARY KEY,
+        ASSIGNEE_NAME VARCHAR(255) NOT NULL
+    );
+        
 
     -- 【DML】
     -- 性別マスターテーブル
@@ -603,6 +579,18 @@ ___
     INSERT INTO `jna`.`m_prefectures` (`PLACE_ID`, `PLACE_NAME`) VALUES (46,'鹿児島');
     INSERT INTO `jna`.`m_prefectures` (`PLACE_ID`, `PLACE_NAME`) VALUES (47,'沖縄');
 
+    -- 配属先マスターテーブル
+    INSERT INTO `jna`.`m_assignee` (`ASSIGNEE_ID`, `ASSIGNEE_NAME`) VALUES (1,'神奈川営業所');
+    INSERT INTO `jna`.`m_assignee` (`ASSIGNEE_ID`, `ASSIGNEE_NAME`) VALUES (2,'新宿営業所');
+    INSERT INTO `jna`.`m_assignee` (`ASSIGNEE_ID`, `ASSIGNEE_NAME`) VALUES (3,'大阪営業所');
+    INSERT INTO `jna`.`m_assignee` (`ASSIGNEE_ID`, `ASSIGNEE_NAME`) VALUES (4,'福岡営業所');
+    INSERT INTO `jna`.`m_assignee` (`ASSIGNEE_ID`, `ASSIGNEE_NAME`) VALUES (5,'仙台営業所');
+    INSERT INTO `jna`.`m_assignee` (`ASSIGNEE_ID`, `ASSIGNEE_NAME`) VALUES (6,'宇都宮営業所');
+    INSERT INTO `jna`.`m_assignee` (`ASSIGNEE_ID`, `ASSIGNEE_NAME`) VALUES (7,'大宮営業所');
+    INSERT INTO `jna`.`m_assignee` (`ASSIGNEE_ID`, `ASSIGNEE_NAME`) VALUES (8,'名古屋営業所');
+    ***
+
+
 # 課題
 
 ## 動作方法
@@ -627,9 +615,7 @@ ___
 
 以下の画面を開いた時、画面名称がわからない。
 
-そのため、各画面のhtmlファイルに手を加え、画面内に画面名称を表示するようにしなさい。
-
-htmlファイルは、「jnaWebCourse\src\main\resources\templates」フォルダ内に存在する。
+そのため、各画面のhtmlファイルに画面名称が表示されるようにしなさい。
 
 【作成物】
 
@@ -697,7 +683,6 @@ DBのテーブルから削除する処理を実装しなさい。
 
     - 実装
     - 可能なら単体試験（実装箇所のJUnitを作成）
-    　 「jnaWebCourse\src\test\java\jna\example\training」内に作成。
         
 3. 結合試験
     　　
@@ -720,7 +705,6 @@ DBのテーブルから削除する処理を実装しなさい。
 
     - 実装
     - 可能なら単体試験（実装箇所のJUnitを作成）
-    　 「jnaWebCourse\src\test\java\jna\example\training」内に作成。
         
 3. 結合試験
     　　
@@ -742,7 +726,6 @@ DBのテーブルから削除する処理を実装しなさい。
 
     - 実装
     - 可能なら単体試験（実装箇所のJUnitを作成）
-    　 「jnaWebCourse\src\test\java\jna\example\training」内に作成。
         
 3. 結合試験
     　　

@@ -27,6 +27,17 @@
 
 <div class="ui container" th:object="${editorRequest}">
 
+    <div class="ui red inverted circular segment">
+        <h1 class="ui yellow header">
+                 <span style="background-color:#000000;padding : 0.1em">
+                     [[${name}]]
+                </span>
+        </h1>
+        <p style="color:#0000ff">社員情報をへんしゅ～</p>
+        <p></p>
+    </div>
+
+
     <div class="ui error message" th:if="${#fields.hasErrors('*')}">
         <div class="header">
             エラー
@@ -40,16 +51,17 @@
         <div class="header">
             成功
         </div>
-        <p th:text="#{editor.complete}"></p>
+        <p th:text="#{update.complete}"></p>
     </div>
 
     <form class="ui form" enctype="multipart/form-data" method="post" th:action="@{/editor}">
         <div class="ui grid">
             <div class="twelve wide column">
                 <div class="row">
+                    <!--read onlyにすべきか？-->
                     <div class="required field">
-                        <label>社員番号</label>
-                        <input type="text" th:field="*{empNo}" placeholder="6桁で入力してください。">
+                        <label>社員番号(書き換え不可)</label>
+                        <input type="text" th:field="*{empNo}" placeholder="*{empNo}"　readonly="">
                     </div>
 
                     <div class="required field">
@@ -107,7 +119,9 @@
                         <label>配属先</label>
                         <select class="ui search dropdown" th:field="*{assignee}">
                             <option value="">選択してください</option>
-                            <option th:each="item : ${assigneeList}" th:value="${item.key}">[[${item.value}]]</option>
+                            <option th:each="item : ${assigneeList}" th:value="${item.assigneeId}">
+                                [[${item.assigneeName}]]
+                            </option>
                         </select>
                     </div>
 

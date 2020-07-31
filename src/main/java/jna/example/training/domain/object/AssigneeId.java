@@ -9,10 +9,15 @@ public class AssigneeId {
 
     private int assignee;
 
+
     private AssigneeId(String value) {
         this.assignee = Integer.parseInt(value);
     }
 
+    /**
+     * @param value
+     * @return
+     */
     public static AssigneeId of(String value) {
         return Optional.ofNullable(value).map(AssigneeId::new).orElse(null);
     }

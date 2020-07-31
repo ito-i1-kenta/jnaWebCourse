@@ -5,13 +5,12 @@ import jna.example.training.infrastructure.entity.EmployeeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Data
-@AllArgsConstructor(staticName = "create")
-public class RegisterResource {
+@AllArgsConstructor(staticName = "edit")
+public class EditorResource {
     private EmpNo empNo;
     private UserName userName;
     private Password password;

@@ -1,6 +1,7 @@
 $(function () {
   $(document).ready(function () {
-    $('table').tablesort();
+
+    $('#myTable').tablesort();
 
     $('button[name="deleteModal"]').on('click', function() {
       // モーダルダイアログ表示

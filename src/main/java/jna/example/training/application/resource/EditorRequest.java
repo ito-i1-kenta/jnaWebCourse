@@ -1,9 +1,11 @@
 package jna.example.training.application.resource;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Date;
 import java.util.Optional;
 
 @Data
@@ -21,6 +23,8 @@ public class EditorRequest {
 
     // 日付（YYYY-MM-DD）のバリデーション
     public String birthDate;
+//@DateTimeFormat(pattern = "yyyyMMdd") // (1)
+//private String birthDate;
 
     @NotNull
     public String sex;
