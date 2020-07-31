@@ -15,7 +15,6 @@ public class CommonEntity {
     }
 
     public void updateData() {
-//        this.updateAt = Utility.now();
         this.updateAt = LocalDateTime.now();
     }
 }

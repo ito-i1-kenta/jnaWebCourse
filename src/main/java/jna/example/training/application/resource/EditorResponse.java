@@ -24,8 +24,6 @@ public class EditorResponse {
                 resource.getBirthPlaceId().getBirthPlace(),
                 Optional.ofNullable(resource.getNickName()).map(val -> val.getNickName()).orElse(null),
                 resource.getAssigneeId().getAssignee(),
-                resource.getUnitPrice().getUnitPrice(),
-                resource.getPositionId().getPositionId(),
                 Optional.ofNullable(resource.getPhoto()).map(val -> val.getPhoto()).orElse(null)
         );
     }
@@ -41,8 +39,6 @@ public class EditorResponse {
         private int birthPlaceId;
         private String nickName;
         private int assigneeId;
-        private String unitPrice;
-        private int positionId;
         private String photo;
     }
 

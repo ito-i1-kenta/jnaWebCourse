@@ -6,37 +6,12 @@ Actor "操作者" as User
 User -> 社員情報一覧画面
 
 activate 社員情報一覧画面
-社員情報一覧画面 -> EditorController :POST /editor
+社員情報一覧画面 -> EditorController
 deactivate 社員情報一覧画面
-
-activate EditorController
-EditorController -> EditorService
-deactivate EditorController
-
-activate EditorService
-EditorService -> 各種mapper
-deactivate EditorService
-
-activate 各種mapper
-各種mapper -> DB
-deactivate 各種mapper
-
-activate DB
-各種mapper <- DB
-deactivate DB
-
-activate 各種mapper
-EditorService <- 各種mapper
-deactivate 各種mapper
-
-activate EditorService
-EditorController <- EditorService
-deactivate EditorService
 
 activate EditorController
 社員情報一覧画面 <- EditorController
 deactivate EditorController
-
 
 activate 社員情報一覧画面
 User <- 社員情報一覧画面

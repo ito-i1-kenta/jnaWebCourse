@@ -1,11 +1,9 @@
 package jna.example.training.application.controller;
 
 import jna.example.training.application.resource.RegisterRequest;
-import jna.example.training.application.resource.Register_Editor_Resource;
+import jna.example.training.application.resource.RegisterResource;
 import jna.example.training.domain.object.*;
 import jna.example.training.domain.service.RegisterService;
-import jna.example.training.infrastructure.entity.AssigneeEntity;
-import jna.example.training.infrastructure.entity.PositionEntity;
 import jna.example.training.infrastructure.entity.PrefecturesEntity;
 import jna.example.training.infrastructure.entity.SexEntity;
 import lombok.AllArgsConstructor;
@@ -19,16 +17,14 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Base64;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Controller
 @AllArgsConstructor
 public class RegisterController {
 
     protected final MessageSource messageSource;
-    protected final RegisterService registerService;
+    private final RegisterService registerService;
 
     /*
         画面から受け取る値が未入力、未設定ならnullを設定するためのメソッド
@@ -57,7 +53,7 @@ public class RegisterController {
             return "register";
         }
 
-        Register_Editor_Resource resource = Register_Editor_Resource.create(
+        RegisterResource resource = RegisterResource.create(
                 EmpNo.of(registerRequest.empNo),
                 UserName.of(registerRequest.userName),
                 Password.of(registerRequest.password),
@@ -66,8 +62,6 @@ public class RegisterController {
                 BirthPlaceId.of(registerRequest.birthPlace),
                 NickName.of(registerRequest.nickName),
                 AssigneeId.of(registerRequest.assignee),
-                UnitPrice.of(registerRequest.unitPrice),
-                PositionId.of(registerRequest.position),
                 Photo.of(registerRequest.photo)
         );
 
@@ -127,26 +121,17 @@ public class RegisterController {
         配属先リスト
      */
     @ModelAttribute("assigneeList")
-    public List<AssigneeEntity> assigneeList() {
-        return  registerService.getAssigneeList();
-//        return new LinkedHashMap<String, String>() {{
-//            put("1", "神奈川営業所");
-//            put("2", "新宿営業所");
-//            put("3", "大阪営業所");
-//            put("4", "福岡営業所");
-//            put("5", "仙台営業所");
-//            put("6", "宇都宮営業所");
-//            put("7", "大宮営業所");
-//            put("8", "名古屋営業所");
-//        }};
-    }
-
-    /*
-        出身地リスト
-     */
-    @ModelAttribute("positionList")
-    public List<PositionEntity> positionList() {
-        return registerService.getPositionList();
+    public HashMap<String, String> assigneeList() {
+        return new LinkedHashMap<String, String>() {{
+            put("1", "神奈川営業所");
+            put("2", "新宿営業所");
+            put("3", "大阪営業所");
+            put("4", "福岡営業所");
+            put("5", "仙台営業所");
+            put("6", "宇都宮営業所");
+            put("7", "大宮営業所");
+            put("8", "名古屋営業所");
+        }};
     }
 
 }

@@ -2,13 +2,9 @@ package jna.example.training.application.controller;
 
 import jna.example.training.application.resource.EditorRequest;
 import jna.example.training.application.resource.EditorResponseResource;
-import jna.example.training.application.resource.Register_Editor_Resource;
-import jna.example.training.domain.object.*;
-import jna.example.training.domain.service.EditorService;
+import jna.example.training.domain.object.EmpNo;
 import jna.example.training.domain.service.RegisterService;
 import jna.example.training.domain.service.ViewerService;
-import jna.example.training.infrastructure.entity.AssigneeEntity;
-import jna.example.training.infrastructure.entity.PositionEntity;
 import jna.example.training.infrastructure.entity.PrefecturesEntity;
 import jna.example.training.infrastructure.entity.SexEntity;
 import lombok.AllArgsConstructor;
@@ -22,6 +18,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Pattern;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,7 +30,6 @@ public class EditorController {
     protected final MessageSource messageSource;
     private final RegisterService registerService;
     private final ViewerService viewerService;
-    private final EditorService editorService;
 
     /*
         画面から受け取る値が未入力、未設定ならnullを設定するためのメソッド
@@ -51,7 +48,7 @@ public class EditorController {
                        Model model) {
 
         // 検索処理
-        EditorResponseResource resource = viewerService.searchByEmpNo(EmpNo.of(empNo));
+        EditorResponseResource resource = viewerService.searchById(EmpNo.of(empNo));
 
         // レスポンス値の設定
         editorRequest.factory(resource);
@@ -73,21 +70,7 @@ public class EditorController {
         }
 
         // TODO:更新処理
-        Register_Editor_Resource resource = Register_Editor_Resource.create(
-                EmpNo.of(editorRequest.empNo),
-                UserName.of(editorRequest.userName),
-                Password.of(editorRequest.password),
-                BirthDate.of(editorRequest.birthDate),
-                SexId.of(editorRequest.sex),
-                BirthPlaceId.of(editorRequest.birthPlace),
-                NickName.of(editorRequest.nickName),
-                AssigneeId.of(editorRequest.assignee),
-                UnitPrice.of(editorRequest.unitPrice),
-                PositionId.of(editorRequest.position),
-                Photo.of(editorRequest.photo)
-        );
 
-        editorService.edit(resource);
 
         // 画面に表示する属性設定
         model.addAttribute("complete", messageSource.getMessage("editor.complete", null, Locale.JAPAN));
@@ -115,25 +98,17 @@ public class EditorController {
         配属先リスト
      */
     @ModelAttribute("assigneeList")
-    public List<AssigneeEntity> assigneeList() {
-        return registerService.getAssigneeList();
-//        return new LinkedHashMap<String, String>() {{
-//            put("1", "神奈川営業所");
-//            put("2", "新宿営業所");
-//            put("3", "大阪営業所");
-//            put("4", "福岡営業所");
-//            put("5", "仙台営業所");
-//            put("6", "宇都宮営業所");
-//            put("7", "大宮営業所");
-//            put("8", "名古屋営業所");
-//        }};
+    public HashMap<String, String> assigneeList() {
+        return new LinkedHashMap<String, String>() {{
+            put("1", "神奈川営業所");
+            put("2", "新宿営業所");
+            put("3", "大阪営業所");
+            put("4", "福岡営業所");
+            put("5", "仙台営業所");
+            put("6", "宇都宮営業所");
+            put("7", "大宮営業所");
+            put("8", "名古屋営業所");
+        }};
     }
 
-    /*
-        出身地リスト
-     */
-    @ModelAttribute("positionList")
-    public List<PositionEntity> positionList() {
-        return registerService.getPositionList();
-    }
 }

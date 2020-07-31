@@ -14,8 +14,6 @@ public class ViewerResponseResource {
     private BirthPlaceName birthPlaceName;
     private NickName nickName;
     private AssigneeName assigneeName;
-    private UnitPrice unitPrice;
-    private PositionName positionName;
     private Photo photo;
 
 }

@@ -33,9 +33,9 @@ public class ViewerService {
     /**
      * 社員情報検索（社員番号）
      */
-    public EditorResponseResource searchByEmpNo(EmpNo empNo) {
+    public EditorResponseResource searchById(EmpNo empNo) {
 
-        EmployeeEntity result = employeeMapper.searchByEmpNo(empNo.getEmpNo());
+        EmployeeEntity result = employeeMapper.searchById(empNo.getEmpNo());
 
         ViewerResponseResource resource = searchFactory(result);
         return EditorResponseResource.builder()
@@ -47,8 +47,6 @@ public class ViewerService {
                 .birthPlaceId(BirthPlaceId.of(Integer.valueOf(result.getBirthPlaceId()).toString()))
                 .nickName(Optional.ofNullable(result.getNickName()).map(val -> NickName.of(val)).orElse(null))
                 .assigneeId(Optional.ofNullable(result.getAssigneeId()).map(val -> AssigneeId.of(Integer.valueOf(val).toString())).orElse(null))
-                .unitPrice(UnitPrice.of(Integer.valueOf(result.getUnitPrice()).toString()))
-                .positionId(PositionId.of(Integer.valueOf(result.getPositionId()).toString()))
                 .photo(Optional.ofNullable(result.getPhoto()).map(val -> Photo.of(new String(val))).orElse(null))
                 .build();
 
@@ -63,8 +61,6 @@ public class ViewerService {
                 .birthPlaceName(BirthPlaceName.of(entity.getBirthPlaceName()))
                 .nickName(Optional.ofNullable(entity.getNickName()).map(val -> NickName.of(val)).orElse(null))
                 .assigneeName(Optional.ofNullable(entity.getAssigneeName()).map(val -> AssigneeName.of(val)).orElse(null))
-                .unitPrice(UnitPrice.of(Integer.valueOf(entity.getUnitPrice()).toString()))
-                .positionName(PositionName.of(entity.getPositionName()))
                 .photo(Optional.ofNullable(entity.getPhoto()).map(val -> Photo.of(new String(val))).orElse(null))
                 .build();
     }

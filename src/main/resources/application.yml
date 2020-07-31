@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/jna?serverTimezone=UTC
     username: root
-    password: tech2020
+    password: root
 
 mybatis:
   mapperLocations: classpath*:/mapper/*.xml

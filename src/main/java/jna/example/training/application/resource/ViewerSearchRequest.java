@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ViewerSearchRequest {
-    private String empNo;
-    private String userName;
+    public String empNo;
+    public String userName;
 
 }

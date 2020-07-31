@@ -15,8 +15,6 @@ public class EditorResponseResource {
     private BirthPlaceId birthPlaceId;
     private NickName nickName;
     private AssigneeId assigneeId;
-    private UnitPrice unitPrice;
-    private PositionId positionId;
     private Photo photo;
 
 }

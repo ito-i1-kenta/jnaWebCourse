@@ -32,12 +32,6 @@ public class RegisterRequest {
     @NotNull
     public String assignee;
 
-    @NotNull
-    public String unitPrice;
-
-    @NotNull
-    public String position;
-
     public String photo;
 
 }
